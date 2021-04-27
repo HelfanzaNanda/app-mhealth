@@ -24,7 +24,7 @@
           <span class="link-title">Rujukan</span>
         </a>
       </li>
-      
+
       <li class="nav-item {{ active_class(['users']) }}">
         <a href="{{ url('backoffice/users') }}" class="nav-link">
           <i class="link-icon" data-feather="user"></i>
@@ -32,6 +32,13 @@
         </a>
       </li>
 
+
+      <li class="nav-item {{ active_class(['users']) }}">
+        <a href="{{ url('backoffice/kategori') }}" class="nav-link">
+          <i class="link-icon" data-feather="user"></i>
+          <span class="link-title">Kategori</span>
+        </a>
+      </li>
 
       <li class="nav-item {{ active_class(['users']) }}">
         <a href="{{ url('backoffice/users') }}" class="nav-link">
@@ -64,7 +71,7 @@
           <span class="link-title">Faskes</span>
         </a>
       </li>
-      
+
     </ul>
   </div>
 </nav>
