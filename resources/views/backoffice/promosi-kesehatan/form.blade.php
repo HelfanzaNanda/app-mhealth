@@ -1,20 +1,13 @@
 @extends('backoffice.layout.master')
 @push('plugin-styles')
-{{-- <link
-  href="http://localhost/git/ethnic-india-admin/public/assets/plugins/bootstrap-colorpicker/bootstrap-colorpicker.min.css"
-  rel="stylesheet" />
-<link href="http://localhost/git/ethnic-india-admin/public/assets/plugins/select2/select2.min.css" rel="stylesheet" /> --}}
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="{{ asset('assets/plugins/jquery-rich-text-editor/richtext.min.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+
 
 @endpush
 @push('plugin-scripts')
 <script src="{{ asset('assets/plugins/tinymce/tinymce.min.js') }}"></script>
-{{-- <script src="http://localhost/git/ethnic-india-admin/public/assets/plugins/select2/select2.min.js"></script>
-<script
-  src="http://localhost/git/ethnic-india-admin/public/assets/plugins/bootstrap-colorpicker/bootstrap-colorpicker.min.js">
-</script> --}}
-<script src="{{ asset('assets/plugins/jquery-rich-text-editor/jquery.richtext.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
 @endpush
 @section('content')
@@ -73,7 +66,7 @@
               <div class="row">
                 <label class="col-12 col-md-3 mt-2">Konten</label>
                 <div class="col-12 col-md-9">
-                  <textarea class="richtext form-control" id="body" name="body" placeholder="Konten">{!! $data['body'] !!}</textarea>
+                  <textarea class="summernote form-control" id="body" name="body" placeholder="Konten">{!! $data['body'] !!}</textarea>
                 </div>
               </div>
             </form>
@@ -96,11 +89,10 @@
 
 @push('scripts')
 <script type="text/javascript">
-  $('.richtext').richText({
-    // text formatting
-      bold: true,
-      italic: true,
-      underline: true,
+  $(document).ready(function() {
+    $('.summernote').summernote({
+        height: 100
+    });
   });
 
   function save(back = false){
