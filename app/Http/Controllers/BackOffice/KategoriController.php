@@ -41,7 +41,6 @@ class KategoriController extends Controller
     public function edit($id)
     {
         $data = Kategori::firstWhere('id', $id);
-        $data->password = '';
         return view('backoffice.kategori.form', ['title' => "Edit - {$data->kategori}", 'data' => $data]);
     }
 
@@ -66,11 +65,11 @@ class KategoriController extends Controller
         }
 
         if (!empty($id)) {
-            Kategori::where(['id' => $id])->update($data);
+            $kategori = Kategori::where(['id' => $id])->update($data);
         } else {
-            Kategori::insert($data);
+            $kategori = Kategori::insert($data);
         }
 
-        return response()->json(['status' => 1]);
+        return response()->json(['status' => 1, 'id' => $kategori->id]);
     }
 }

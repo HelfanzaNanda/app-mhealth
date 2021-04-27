@@ -97,7 +97,7 @@
                 return
               }
               this.data.id=response.data.id;
-              window.location.href='{{route('backoffice.users.edit','')}}/'+this.data.id;
+              window.location.href='{{route('backoffice.kategori.edit','')}}/'+this.data.id;
             
             });
           })
