@@ -8,6 +8,7 @@ use Route;
 use DB;
 use App\Models\User;
 use App\Http\Controllers\BackOfficeController;
+use App\Models\Kategori;
 use App\Models\PromosiKesehatan;
 
 class PromosiKesehatanController extends BackOfficeController
@@ -40,6 +41,7 @@ class PromosiKesehatanController extends BackOfficeController
 		
 		PromosiKesehatan::updateOrCreate(['id' => $id], [
 			'date' => request()->input('date'),
+			'kategori_id' => request()->input('kategori_id'),
 			'title' => request()->input('title'),
 			'body' => request()->input('body')
 		]);
@@ -53,14 +55,22 @@ class PromosiKesehatanController extends BackOfficeController
 	public function edit($id)
 	{
 		$data = PromosiKesehatan::firstWhere('id', $id);
-		return view('backoffice.promosi-kesehatan.form', ['title' => "Edit - {$data->title}", 'data' => $data]);
+		$categories = Kategori::all();
+		return view('backoffice.promosi-kesehatan.form', [
+			'title' => "Edit - {$data->title}", 
+			'data' => $data,
+			'categories' => $categories,
+		]);
 	}
 
 	public function insert()
 	{
+		$categories = Kategori::all();
 		return view('backoffice.promosi-kesehatan.form', [
 			'title' => 'Insert',
+			'categories' => $categories,
 			'data' => [
+				'kategori_id' => '',
 				'id' => '',
 				'date' => '',
 				'title' => '',

@@ -41,7 +41,21 @@
           <div class="card-body">
             <form id="pk-form" action="">
               @csrf
-              <input type="text" name="id" value="{{ $data['id'] }}">
+              <input type="hidden" name="id" value="{{ $data['id'] }}">
+              <div class="row">
+                <label class="col-12 col-md-3 mt-2">Kategori</label>
+                <div class="col-12 col-md-9">
+                  <select name="kategori_id" id="">
+                      <option value="">- Pilih Kategori -</option>
+                      @foreach ($categories as $category)
+                          <option value="{{ $category->id }}"
+                            {{ $category->id == $data['kategori_id'] ? 'selected' : '' }}>
+                            {{ $category->kategori }}
+                          </option>
+                      @endforeach
+                  </select>
+                </div>
+              </div>
               <div class="row">
                 <label class="col-12 col-md-3 mt-2">Tanggal</label>
                 <div class="col-12 col-md-9">
