@@ -22,7 +22,7 @@
   <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
     <a href="{{route('backoffice.users.index')}}"><i class="fa fa-arrow-left"></i> Back</a>
   </div>
-  <div v-if="isLoading">
+  <div class="loading" style="display: none">
     <div class="card">
       <div class="card-body text-center">
         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -39,25 +39,38 @@
             </h5>
           </div>
           <div class="card-body">
-            <div class="row">
-              <label class="col-12 col-md-3 mt-2">Judul</label>
-              <div class="col-12 col-md-9">
-                <input type="text" v-model="data.title" class="form-control" placeholder="Judul">
+            <form id="pk-form" action="">
+              @csrf
+              <input type="text" name="id" value="{{ $data['id'] }}">
+              <div class="row">
+                <label class="col-12 col-md-3 mt-2">Tanggal</label>
+                <div class="col-12 col-md-9">
+                  <input type="date" name="date" class="form-control" placeholder="Tanggal"
+                  value="{{ $data['date'] }}">
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <label class="col-12 col-md-3 mt-2">Konten</label>
-              <div class="col-12 col-md-9">
-                <textarea class="richtext form-control" v-model="data.body" placeholder="Konten"></textarea>
+              <div class="row">
+                <label class="col-12 col-md-3 mt-2">Judul</label>
+                <div class="col-12 col-md-9">
+                  <input type="text" name="title" class="form-control" placeholder="Judul"
+                  value="{{ $data['title'] }}">
+                </div>
               </div>
-            </div>
+              <div class="row">
+                <label class="col-12 col-md-3 mt-2">Konten</label>
+                <div class="col-12 col-md-9">
+                  <textarea class="richtext form-control" id="body" name="body" placeholder="Konten">{!! $data['body'] !!}</textarea>
+                </div>
+              </div>
+            </form>
+            
           </div>
         </div>
         <div class="card">
           <div class="card-body">
             <div class="text-center">
-              <button class="btn btn-outline-success" @click="Save(true)">Save & Back</button>
-              <button class="btn btn-success" @click="Save()">Save</button>
+              <button class="btn btn-outline-success" onclick="save(true)">Save & Back</button>
+              <button class="btn btn-success" onclick="save()">Save</button>
             </div>
           </div>
         </div>
@@ -71,30 +84,17 @@
 <script type="text/javascript">
   $('.richtext').richText({
     // text formatting
-  bold: true,
-  italic: true,
-  underline: true,
+      bold: true,
+      italic: true,
+      underline: true,
   });
-  var app = new Vue({
-      el:'#content',
-      data:{
-        isLoading:false,
-        isSaving:false,
-        data:@json($data),
-      },
-      computed:{
-      },
-      watch:{
-      },
-      mounted(){
-      },
-      methods:{
-        async Save(back=false){
-          this.isSaving=true;
 
-          await axios.post('{{route('backoffice.promosi-kesehatan.save')}}',this.data)
-          .then(response=>{
-            if(response.data.status!=1){
+  function save(back = false){
+        let form = new FormData($('#pk-form')[0]);
+        axios.post('{{route('backoffice.promosi-kesehatan.save')}}',form)
+        .then(response => {
+          console.log(response);
+          if(response.data.status!=1){
               Swal.fire({
                 icon:'warning',
                 text:response.data.msg
@@ -113,15 +113,12 @@
               }
               window.location.href='{{route('backoffice.promosi-kesehatan.insert')}}';
             });
-          })
-          .catch(error=>{
-            console.log(error)
-          })
-          this.isSaving=false;
-        },
-      },
-      updated(){
-      }
-    })
+        }).catch(error=>{
+            Swal.fire({
+                icon:'warning',
+                text:error
+            })
+        })
+    }
 </script>
 @endpush

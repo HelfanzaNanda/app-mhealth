@@ -181,7 +181,8 @@ Route::group(['prefix' => 'backoffice', 'as' => 'backoffice.'], function () {
         Route::get('insert', 'BackOffice\PromosiKesehatanController@insert')->name('insert');
         Route::post('/datatables', 'BackOffice\PromosiKesehatanController@datatables')->name('datatables');
         Route::post('/save', 'BackOffice\PromosiKesehatanController@save')->name('save');
-        Route::post('/delete', 'BackOffice\PromosiKesehatanController@delete')->name('delete');
+        Route::delete('/delete/{id}', 'BackOffice\PromosiKesehatanController@delete')->name('delete');
+        Route::get('/recommended/{id}', 'BackOffice\PromosiKesehatanController@recommended')->name('recommended');
     });
 
     Route::group(['prefix' => 'banner', 'as' => 'banner.'], function () {
