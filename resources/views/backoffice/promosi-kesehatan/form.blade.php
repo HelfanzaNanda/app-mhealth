@@ -94,7 +94,6 @@
         height: 100
     });
   });
-
   function save(back = false){
         let form = new FormData($('#pk-form')[0]);
         axios.post('{{route('backoffice.promosi-kesehatan.save')}}',form)

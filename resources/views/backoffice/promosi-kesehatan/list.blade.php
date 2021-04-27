@@ -83,7 +83,6 @@
         }
     })
   }
-
   async function recommended(input, id) { 
     const url = "{{ route('backoffice.promosi-kesehatan.recommended', '') }}"+"/"+id;
     const response = await axios.get(url)
