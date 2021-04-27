@@ -67,7 +67,7 @@
                       }
                       Swal.fire({
                           icon:'success',
-                          text:'Prubahan disimpan'
+                          text:'Perubahan disimpan'
                       }).then(res=>{
                           $('#datatable').DataTable().ajax.reload()
                       })

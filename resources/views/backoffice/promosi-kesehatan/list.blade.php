@@ -1,24 +1,24 @@
 @extends('backoffice.layout.master')
 @push('plugin-styles')
-  <link href="{{ asset('assets/plugins/datatables-net/dataTables.bootstrap4.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/plugins/datatables-net/dataTables.bootstrap4.css') }}" rel="stylesheet" />
 @endpush
 
 @push('plugin-scripts')
-  <script src="{{ asset('assets/plugins/tinymce/tinymce.min.js') }}"></script>
-  <script src="{{ asset('assets/plugins/datatables-net/jquery.dataTables.js') }}"></script>
-  <script src="{{ asset('assets/plugins/datatables-net-bs4/dataTables.bootstrap4.js') }}"></script>
+<script src="{{ asset('assets/plugins/tinymce/tinymce.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-net/jquery.dataTables.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-net-bs4/dataTables.bootstrap4.js') }}"></script>
 @endpush
 @section('content')
 <div id="content">
   <div class="card">
     <div class="card-header">
-      <div  class="d-flex justify-content-between align-items-center flex-wrap">
+      <div class="d-flex justify-content-between align-items-center flex-wrap">
         <div>
-          <h5 class="mb-0">Users</h5>
+          <h5 class="mb-0">Promosi Kesehatan</h5>
         </div>
         <div class="d-flex align-items-center flex-wrap text-nowrap">
-          
-          <a class="btn btn-sm btn-primary mb-2 mb-md-0" href="{{route('backoffice.users.insert')}}">
+
+          <a class="btn btn-sm btn-primary mb-2 mb-md-0" href="{{route('backoffice.promosi-kesehatan.insert')}}">
             <i class="fa fa-plus"></i>
             Add
           </a>
@@ -29,13 +29,12 @@
       <div class="mb-2">
         <div class="table-responsive py-1" style="min-height: 50vh">
           @include('backoffice.components.datatable-default',[
-            'url'=>route('backoffice.users.datatables'),
-            'columns'=>[
-              'name'=>'<th>Nama</th>',
-              'email'=>'<th>Email</th>',
-              'role'=>'<th>Role</th>',
-              '_buttons'=>'<th></th>'
-            ],
+          'url'=>route('backoffice.promosi-kesehatan.datatables'),
+          'columns'=>[
+          'title'=>'<th>Judul</th>',
+          'body'=>'<th>Isi</th>',
+          '_buttons'=>'<th></th>'
+          ],
           ])
         </div>
       </div>
@@ -46,6 +45,6 @@
 
 @push('scripts')
 <script type="text/javascript">
-    
+
 </script>
 @endpush

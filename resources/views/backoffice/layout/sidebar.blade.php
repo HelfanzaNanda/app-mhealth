@@ -41,7 +41,7 @@
       </li>
 
       <li class="nav-item {{ active_class(['users']) }}">
-        <a href="{{ url('backoffice/users') }}" class="nav-link">
+        <a href="{{ url('backoffice/promosi-kesehatan') }}" class="nav-link">
           <i class="link-icon" data-feather="user"></i>
           <span class="link-title">Promosi Kesehatan</span>
         </a>

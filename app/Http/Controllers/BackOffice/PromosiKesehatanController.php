@@ -8,13 +8,14 @@ use Route;
 use DB;
 use App\Models\User;
 use App\Http\Controllers\BackOfficeController;
+use App\Models\PromosiKesehatan;
 
 class PromosiKesehatanController extends BackOfficeController
 {
 	public function datatables()
 	{
 
-		$data = User::all();
+		$data = PromosiKesehatan::all();
 		$datatables = datatables($data)
 			->addColumn('_buttons', function ($row) {
 				$editurl = route('backoffice.promosi-kesehatan.edit', $row->id);
@@ -27,32 +28,19 @@ class PromosiKesehatanController extends BackOfficeController
 	public function save()
 	{
 		$id = request()->input('id');
-		$name = request()->input('name');
-		$email = request()->input('email');
-		$role = request()->input('role');
-		$password = request()->input('password');
+		$title = request()->input('title');
+		$body = request()->input('body');
 
 		$data = [
-			'name' => $name,
-			'email' => $email,
-			'role' => $role,
+			'title' => $title,
+			'body' => $body,
+			'show_bidan' => 1,
+			'show_pasien' => 1,
 		];
-		if (User::where('email', $email)->where('id', '!=', $id)->exists()) {
-			return response()->json(['status' => 0, 'msg' => 'Email sudah digunakan']);
-		}
 		if (!empty($id)) {
-			if (!empty($password)) {
-				$data['password'] = md5($password);
-			}
-
-			User::where(['id' => $id])->update($data);
+			PromosiKesehatan::where(['id' => $id])->update($data);
 		} else {
-			if (empty($password)) {
-				return response()->json(['status' => 0, 'msg' => 'Periksa password']);
-			}
-			$data['password'] = md5($password);
-
-			User::insert($data);
+			PromosiKesehatan::insert($data);
 		}
 		return response()->json(['status' => 1]);
 	}
@@ -63,18 +51,15 @@ class PromosiKesehatanController extends BackOfficeController
 	}
 	public function edit($id)
 	{
-		$data = User::firstWhere('id', $id);
-		$data->password = '';
-		return view('backoffice.promosi-kesehatan.form', ['title' => "Edit - {$data->name}", 'data' => $data]);
+		$data = PromosiKesehatan::firstWhere('id', $id);
+		return view('backoffice.promosi-kesehatan.form', ['title' => "Edit - {$data->title}", 'data' => $data]);
 	}
+
 	public function insert()
 	{
 		return view('backoffice.promosi-kesehatan.form', ['title' => 'Insert', 'data' => [
-			'id' => '',
-			'name' => '',
-			'email' => '',
-			'password' => '',
-			'role' => 'pasien'
+			'title' => '',
+			'body' => '',
 		]]);
 	}
 }
