@@ -8,6 +8,7 @@ use Route;
 use DB;
 use App\Models\User;
 use App\Http\Controllers\BackOfficeController;
+use App\Models\Kategori;
 use App\Models\PromosiKesehatan;
 
 class PromosiKesehatanController extends BackOfficeController
@@ -19,7 +20,9 @@ class PromosiKesehatanController extends BackOfficeController
 		$datatables = datatables($data)
 			->addColumn('_buttons', function ($row) {
 				$editurl = route('backoffice.promosi-kesehatan.edit', $row->id);
-				return "<a class=\"btn btn-xs btn-info\" href=\"{$editurl}\"><i class=\"fa fa-edit\"></i> Edit</a>";
+				$btn = '<a class="btn btn-xs btn-info" href="' . $editurl . '"><i class="fa fa-edit"></i> Edit</a>';
+				$btn .= '<a class="btn btn-xs btn-danger" onclick="Delete(' . $row->id . ')"><i class="fa fa-trash"></i> Delete</a>';
+				return $btn;
 			})
 			->rawColumns(['_buttons']);
 
@@ -54,14 +57,42 @@ class PromosiKesehatanController extends BackOfficeController
 	public function edit($id)
 	{
 		$data = PromosiKesehatan::firstWhere('id', $id);
-		return view('backoffice.promosi-kesehatan.form', ['title' => "Edit - {$data->title}", 'data' => $data]);
+		$categories = Kategori::all();
+		return view('backoffice.promosi-kesehatan.form', [
+			'title' => "Edit - {$data->title}",
+			'data' => $data,
+			'categories' => $categories,
+		]);
 	}
 
 	public function insert()
 	{
-		return view('backoffice.promosi-kesehatan.form', ['title' => 'Insert', 'data' => [
-			'title' => '',
-			'body' => '',
-		]]);
+		$categories = Kategori::all();
+		return view('backoffice.promosi-kesehatan.form', [
+			'title' => 'Insert',
+			'categories' => $categories,
+			'data' => [
+				'kategori_id' => '',
+				'id' => '',
+				'date' => '',
+				'title' => '',
+				'body' => '',
+			]
+		]);
+	}
+
+	public function delete($id)
+	{
+		PromosiKesehatan::destroy($id);
+		return response()->json(['status' => 1]);
+	}
+
+	public function recommended($id)
+	{
+		$promosi = PromosiKesehatan::whereId($id)->first();
+		$promosi->update([
+			'recommended' => $promosi->recommended ? false : true
+		]);
+		return response()->json(['status' => 1]);
 	}
 }

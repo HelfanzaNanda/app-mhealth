@@ -31,6 +31,8 @@
           @include('backoffice.components.datatable-default',[
           'url'=>route('backoffice.promosi-kesehatan.datatables'),
           'columns'=>[
+          'recommended'=>'<th>Rekomendasi</th>',
+          'date'=>'<th>Tanggal</th>',
           'title'=>'<th>Judul</th>',
           'body'=>'<th>Isi</th>',
           '_buttons'=>'<th></th>'
@@ -45,6 +47,48 @@
 
 @push('scripts')
 <script type="text/javascript">
+  function Delete(id) {
+    let url = "{{ route('backoffice.promosi-kesehatan.delete', '')}}"+"/"+id;
+    Swal.fire({
+        title: 'Are you sure ?',
+        text: "You won't be able to revert this !",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result) {
+          axios.delete(url)
+            .then(res=> {
+                if(res.data.status!=1){
+                    Swal.fire({
+                        icon:'warning',
+                        text:res.data.msg
+                    })
+                    return
+                }
+                Swal.fire({
+                    icon:'success',
+                    text:'Perubahan disimpan'
+                }).then(res=>{
+                    $('#datatable').DataTable().ajax.reload()
+                })
+            }).catch(error=>{
+                Swal.fire({
+                    icon:'warning',
+                    text:error
+                })
+            })
+        }
+    })
+  }
 
+  async function recommended(input, id) { 
+    const url = "{{ route('backoffice.promosi-kesehatan.recommended', '') }}"+"/"+id;
+    const response = await axios.get(url)
+    console.log(response);
+  }
+  
 </script>
 @endpush

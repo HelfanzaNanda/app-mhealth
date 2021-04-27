@@ -33,7 +33,7 @@
   <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
     <a href="{{route('backoffice.users.index')}}"><i class="fa fa-arrow-left"></i> Back</a>
   </div>
-  <div v-if="isLoading">
+  <div class="loading" style="display: none">
     <div class="card">
       <div class="card-body text-center">
         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -67,8 +67,8 @@
         <div class="card">
           <div class="card-body">
             <div class="text-center">
-              <button class="btn btn-outline-success" @click="Save(true)">Save & Back</button>
-              <button class="btn btn-success" @click="Save()">Save</button>
+              <button class="btn btn-outline-success" onclick="save(true)">Save & Back</button>
+              <button class="btn btn-success" onclick="save()">Save</button>
             </div>
           </div>
         </div>
@@ -81,19 +81,6 @@
 @push('scripts')
 
 <script type="text/javascript">
-  // function Save() {
-  //   let url = "{{ route('backoffice.promosi-kesehatan.save') }}";
-  //   const title = $('#title').val();
-  //   const body = $('#summernote').val();
-  //   axios.post(url, {
-  //     title: title,
-  //     body: body
-  //   }).then((res) => {
-  //     console.log(res);
-  //   })
-  //   console.log(title);
-  //   console.log(body);
-  // }
   var app = new Vue({
       el:'#content',
       data:{
@@ -106,10 +93,8 @@
       watch:{
       },
       created() {
-        $(document).ready(function () {
-          $('.summernote').summernote({
-            height: 200
-          });
+        $(document).ready(function() {
+          $('.summernote').summernote();
         });
       },
       mounted(){
@@ -117,11 +102,8 @@
       methods:{
         async Save(back=false){
           this.isSaving=true;
-          // console.log($('#summernote').val());
-          await axios.post('{{route('backoffice.promosi-kesehatan.save')}}',{
-            title: this.data.title,
-            body: $('#summernote').val()
-          })
+
+          await axios.post('{{route('backoffice.kategori.save')}}',this.data)
           .then(response=>{
             if(response.data.status!=1){
               Swal.fire({
@@ -137,10 +119,10 @@
               timer:2000
             }).then(res=>{
               if(back){
-                window.location.href='{{route('backoffice.promosi-kesehatan.index')}}';
+                window.location.href='{{route('backoffice.kategori.index')}}';
                 return
               }
-              window.location.href='{{route('backoffice.promosi-kesehatan.insert')}}';
+              window.location.href='{{route('backoffice.kategori.insert')}}';
             });
           })
           .catch(error=>{
