@@ -69,7 +69,6 @@ class KategoriController extends Controller
         } else {
             $kategori = Kategori::insert($data);
         }
-
         return response()->json(['status' => 1, 'id' => $kategori->id]);
     }
 }
