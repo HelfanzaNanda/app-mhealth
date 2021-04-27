@@ -30,12 +30,8 @@
     <div class="container" >
         <div class="card">
             <div class="card-body">
-                <a href="#" class="d-flex justify-content-between mb-29">
-                    <span class="font-size-16 text-black font-weight-500">Pemeriksaan Fisik</span> 
-                    <img src="{{ asset('images/icon/next.png') }}" width="15" height="15">
-                </a>
-                <a href="#" class="d-flex justify-content-between mb-29">
-                    <span class="font-size-16 text-black font-weight-500">Pemeriksaan Lab</span> 
+                <a href="#" onclick="openFrame('{{ route('pasien.profile.modal.password.change') }}', 'Edit Password')" class="d-flex justify-content-between mb-29">
+                    <span class="font-size-16 text-black font-weight-500">Ubah Password</span>
                     <img src="{{ asset('images/icon/next.png') }}" width="15" height="15">
                 </a>
                 <a href="#" class="d-flex justify-content-between mb-29">

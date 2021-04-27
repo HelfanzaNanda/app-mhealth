@@ -43,6 +43,8 @@ Route::group(['prefix' => 'pasien','as'=>'pasien.'],function(){
         Route::get('/', 'Frontend\ProfileController@index')->name('index');
         Route::get('/modal/identity', 'Frontend\ProfileController@identity')->name('modal.identity');
         Route::get('/modal/edit', 'Frontend\ProfileController@edit')->name('modal.edit');
+        Route::get('/modal/password', 'Frontend\ProfileController@showFormChangePassowrd')->name('modal.password.change');
+        Route::post('/modal/password', 'Frontend\ProfileController@changePassword')->name('password.change');
         Route::post('/update', 'Frontend\ProfileController@update')->name('update');
     });
 
