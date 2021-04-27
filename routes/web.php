@@ -22,24 +22,23 @@ Route::get('/logout', 'Frontend\AuthController@logout')->name('logout');
 
 Route::get('/login/{role}', 'Frontend\AuthController@login')->name('login');
 
-Route::group(['prefix' => 'data','as'=>'data.'],function(){
+Route::group(['prefix' => 'data', 'as' => 'data.'], function () {
     Route::post('kabupaten', 'Frontend\DataController@kabupaten')->name('kabupaten');
     Route::post('kecamatan', 'Frontend\DataController@kecamatan')->name('kecamatan');
     Route::post('kelurahan', 'Frontend\DataController@kelurahan')->name('kelurahan');
     Route::post('pasien', 'Frontend\DataController@pasien')->name('pasien');
-
 });
 
-Route::group(['prefix' => 'pasien','as'=>'pasien.'],function(){
+Route::group(['prefix' => 'pasien', 'as' => 'pasien.'], function () {
     Route::get('/', 'Frontend\PasienController@home')->name('home');
-    
-    Route::group(['prefix' => 'health_education','as'=>'health_education.'],function(){
+
+    Route::group(['prefix' => 'health_education', 'as' => 'health_education.'], function () {
         Route::get('/', 'Frontend\PromosiKesehatanController@index')->name('index');
         Route::post('/load_items', 'Frontend\PromosiKesehatanController@load_items')->name('load_items');
         Route::get('/modal/detail', 'Frontend\PromosiKesehatanController@detail')->name('modal.detail');
     });
 
-    Route::group(['prefix' => 'profile','as'=>'profile.'],function(){
+    Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
         Route::get('/', 'Frontend\ProfileController@index')->name('index');
         Route::get('/modal/identity', 'Frontend\ProfileController@identity')->name('modal.identity');
         Route::get('/modal/edit', 'Frontend\ProfileController@edit')->name('modal.edit');
@@ -56,23 +55,23 @@ Route::group(['prefix' => 'pasien','as'=>'pasien.'],function(){
 });
 
 
-Route::group(['prefix' => 'bidan','as'=>'bidan.'],function(){
+Route::group(['prefix' => 'bidan', 'as' => 'bidan.'], function () {
     Route::get('/', 'Frontend\BidanController@home')->name('home');
 
-    Route::group(['prefix' => 'visit','as'=>'visit.'],function(){
+    Route::group(['prefix' => 'visit', 'as' => 'visit.'], function () {
         Route::get('/', 'Frontend\BidanController@visit')->name('index');
     });
 
-    Route::group(['prefix' => 'pasien','as'=>'pasien.'],function(){
+    Route::group(['prefix' => 'pasien', 'as' => 'pasien.'], function () {
         Route::get('/', 'Frontend\BidanPasienController@index')->name('index');
         Route::post('/load_items', 'Frontend\BidanPasienController@load_items')->name('load_items');
         Route::get('/modal/detail', 'Frontend\BidanPasienController@detail')->name('modal.detail');
         Route::get('/modal/insert', 'Frontend\BidanPasienController@insert')->name('modal.insert');
-        
+
         Route::post('/save', 'Frontend\BidanPasienController@save')->name('save');
     });
 
-    Route::group(['prefix' => 'profile','as'=>'profile.'],function(){
+    Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
         Route::get('/', 'Frontend\ProfileController@index')->name('index');
         Route::get('/modal/identity', 'Frontend\ProfileController@identity')->name('modal.identity');
         Route::get('/modal/edit', 'Frontend\ProfileController@edit')->name('modal.edit');
@@ -99,7 +98,7 @@ Route::group(['prefix' => 'bidan','as'=>'bidan.'],function(){
 
 
 
-Route::group(['prefix' => 'backoffice','as'=>'backoffice.'],function(){
+Route::group(['prefix' => 'backoffice', 'as' => 'backoffice.'], function () {
     Route::get('/', 'BackOfficeController@dashboard');
     Route::get('/inventory', 'BackOfficeController@inventory');
     Route::get('/analytic', 'BackOfficeController@analytic');
@@ -113,7 +112,16 @@ Route::group(['prefix' => 'backoffice','as'=>'backoffice.'],function(){
     Route::get('/meta/{page}', 'BackOfficeController@meta');
     Route::get('/meta/', 'BackOfficeController@meta');
 
-    Route::group(['prefix' => 'users','as'=>'users.'],function(){
+    Route::group(['prefix' => 'kategori', 'as' => 'kategori.'], function () {
+        Route::get('/', 'BackOffice\KategoriController@index')->name('index');
+        Route::post('/datatables', 'BackOffice\KategoriController@datatables')->name('datatables');
+        Route::get('insert', 'BackOffice\KategoriController@insert')->name('insert');
+        Route::get('edit/{userid}', 'BackOffice\KategoriController@edit')->name('edit');
+        Route::post('/save', 'BackOffice\KategoriController@save')->name('save');
+        Route::post('/delete', 'BackOffice\KategoriController@delete')->name('delete');
+    });
+
+    Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
         Route::get('/', 'BackOffice\UsersController@index')->name('index');
         Route::get('edit/{userid}', 'BackOffice\UsersController@edit')->name('edit');
         Route::get('insert', 'BackOffice\UsersController@insert')->name('insert');
@@ -122,7 +130,7 @@ Route::group(['prefix' => 'backoffice','as'=>'backoffice.'],function(){
         Route::post('/delete', 'BackOffice\UsersController@delete')->name('delete');
     });
 
-    Route::group(['prefix' => 'bidan-profile', 'as'=>'bidan-profile.'],function(){
+    Route::group(['prefix' => 'bidan-profile', 'as' => 'bidan-profile.'], function () {
         Route::get('/', 'BackOffice\BidanProfileController@index')->name('index');
         Route::get('edit/{userid}', 'BackOffice\BidanProfileController@edit')->name('edit');
         Route::get('insert', 'BackOffice\BidanProfileController@insert')->name('insert');
@@ -131,7 +139,7 @@ Route::group(['prefix' => 'backoffice','as'=>'backoffice.'],function(){
         Route::post('/delete', 'BackOffice\BidanProfileController@delete')->name('delete');
     });
 
-    Route::group(['prefix' => 'pasien-profile', 'as'=>'pasien-profile.'],function(){
+    Route::group(['prefix' => 'pasien-profile', 'as' => 'pasien-profile.'], function () {
         Route::get('/', 'BackOffice\PasienProfileController@index')->name('index');
         Route::get('edit/{userid}', 'BackOffice\PasienProfileController@edit')->name('edit');
         Route::get('insert', 'BackOffice\PasienProfileController@insert')->name('insert');
@@ -140,7 +148,7 @@ Route::group(['prefix' => 'backoffice','as'=>'backoffice.'],function(){
         Route::post('/delete', 'BackOffice\PasienProfileController@delete')->name('delete');
     });
 
-    Route::group(['prefix' => 'faskes', 'as'=>'faskes.'],function(){
+    Route::group(['prefix' => 'faskes', 'as' => 'faskes.'], function () {
         Route::get('/', 'BackOffice\FaskesController@index')->name('index');
         Route::get('edit/{userid}', 'BackOffice\FaskesController@edit')->name('edit');
         Route::get('insert', 'BackOffice\FaskesController@insert')->name('insert');
@@ -149,7 +157,7 @@ Route::group(['prefix' => 'backoffice','as'=>'backoffice.'],function(){
         Route::post('/delete', 'BackOffice\FaskesController@delete')->name('delete');
     });
 
-    Route::group(['prefix' => 'rujukan', 'as'=>'rujukan.'],function(){
+    Route::group(['prefix' => 'rujukan', 'as' => 'rujukan.'], function () {
         Route::get('/', 'BackOffice\RujukanController@index')->name('index');
         Route::get('edit/{userid}', 'BackOffice\RujukanController@edit')->name('edit');
         Route::get('insert', 'BackOffice\RujukanController@insert')->name('insert');
@@ -158,7 +166,7 @@ Route::group(['prefix' => 'backoffice','as'=>'backoffice.'],function(){
         Route::post('/delete', 'BackOffice\RujukanController@delete')->name('delete');
     });
 
-    Route::group(['prefix' => 'kunjungan', 'as'=>'kunjungan.'],function(){
+    Route::group(['prefix' => 'kunjungan', 'as' => 'kunjungan.'], function () {
         Route::get('/', 'BackOffice\KunjunganController@index')->name('index');
         Route::get('edit/{userid}', 'BackOffice\KunjunganController@edit')->name('edit');
         Route::get('insert', 'BackOffice\KunjunganController@insert')->name('insert');
@@ -167,7 +175,7 @@ Route::group(['prefix' => 'backoffice','as'=>'backoffice.'],function(){
         Route::post('/delete', 'BackOffice\KunjunganController@delete')->name('delete');
     });
 
-    Route::group(['prefix' => 'promosi-kesehatan', 'as'=>'promosi-kesehatan.'],function(){
+    Route::group(['prefix' => 'promosi-kesehatan', 'as' => 'promosi-kesehatan.'], function () {
         Route::get('/', 'BackOffice\PromosiKesehatanController@index')->name('index');
         Route::get('edit/{userid}', 'BackOffice\PromosiKesehatanController@edit')->name('edit');
         Route::get('insert', 'BackOffice\PromosiKesehatanController@insert')->name('insert');
@@ -176,7 +184,7 @@ Route::group(['prefix' => 'backoffice','as'=>'backoffice.'],function(){
         Route::post('/delete', 'BackOffice\PromosiKesehatanController@delete')->name('delete');
     });
 
-    Route::group(['prefix' => 'banner', 'as'=>'banner.'],function(){
+    Route::group(['prefix' => 'banner', 'as' => 'banner.'], function () {
         Route::get('/', 'BackOffice\BannerController@index')->name('index');
         Route::get('edit/{userid}', 'BackOffice\BannerController@edit')->name('edit');
         Route::get('insert', 'BackOffice\BannerController@insert')->name('insert');
@@ -189,6 +197,4 @@ Route::group(['prefix' => 'backoffice','as'=>'backoffice.'],function(){
 
 
     Route::get('/login', 'BackOfficeController@login');
-   
-
 });
