@@ -118,7 +118,7 @@ Route::group(['prefix' => 'backoffice', 'as' => 'backoffice.'], function () {
         Route::get('insert', 'BackOffice\KategoriController@insert')->name('insert');
         Route::get('edit/{userid}', 'BackOffice\KategoriController@edit')->name('edit');
         Route::post('/save', 'BackOffice\KategoriController@save')->name('save');
-        Route::post('/delete', 'BackOffice\KategoriController@delete')->name('delete');
+        Route::delete('/delete/{categoryId}', 'BackOffice\KategoriController@delete')->name('delete');
     });
 
     Route::group(['prefix' => 'users', 'as' => 'users.'], function () {
