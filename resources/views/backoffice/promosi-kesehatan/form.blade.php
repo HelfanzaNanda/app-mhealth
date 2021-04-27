@@ -4,8 +4,19 @@
   href="http://localhost/git/ethnic-india-admin/public/assets/plugins/bootstrap-colorpicker/bootstrap-colorpicker.min.css"
   rel="stylesheet" />
 <link href="http://localhost/git/ethnic-india-admin/public/assets/plugins/select2/select2.min.css" rel="stylesheet" /> --}}
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="{{ asset('assets/plugins/jquery-rich-text-editor/richtext.min.css') }}">
+{{-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{{ asset('assets/plugins/jquery-rich-text-editor/richtext.min.css') }}"> --}}
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+  integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 
 @endpush
 @push('plugin-scripts')
@@ -14,7 +25,7 @@
 <script
   src="http://localhost/git/ethnic-india-admin/public/assets/plugins/bootstrap-colorpicker/bootstrap-colorpicker.min.js">
 </script> --}}
-<script src="{{ asset('assets/plugins/jquery-rich-text-editor/jquery.richtext.js') }}"></script>
+{{-- <script src="{{ asset('assets/plugins/jquery-rich-text-editor/jquery.richtext.js') }}"></script> --}}
 
 @endpush
 @section('content')
@@ -42,13 +53,13 @@
             <div class="row">
               <label class="col-12 col-md-3 mt-2">Judul</label>
               <div class="col-12 col-md-9">
-                <input type="text" v-model="data.title" class="form-control" placeholder="Judul">
+                <input type="text" id="title" v-model="data.title" class="form-control" placeholder="Judul">
               </div>
             </div>
             <div class="row">
               <label class="col-12 col-md-3 mt-2">Konten</label>
               <div class="col-12 col-md-9">
-                <textarea class="richtext form-control" v-model="data.body" placeholder="Konten"></textarea>
+                <textarea id="summernote" v-model="data.body" name="body" class="summernote form-control"></textarea>
               </div>
             </div>
           </div>
@@ -68,13 +79,21 @@
 @endsection
 
 @push('scripts')
+
 <script type="text/javascript">
-  $('.richtext').richText({
-    // text formatting
-  bold: true,
-  italic: true,
-  underline: true,
-  });
+  // function Save() {
+  //   let url = "{{ route('backoffice.promosi-kesehatan.save') }}";
+  //   const title = $('#title').val();
+  //   const body = $('#summernote').val();
+  //   axios.post(url, {
+  //     title: title,
+  //     body: body
+  //   }).then((res) => {
+  //     console.log(res);
+  //   })
+  //   console.log(title);
+  //   console.log(body);
+  // }
   var app = new Vue({
       el:'#content',
       data:{
@@ -86,13 +105,23 @@
       },
       watch:{
       },
+      created() {
+        $(document).ready(function () {
+          $('.summernote').summernote({
+            height: 200
+          });
+        });
+      },
       mounted(){
       },
       methods:{
         async Save(back=false){
           this.isSaving=true;
-
-          await axios.post('{{route('backoffice.promosi-kesehatan.save')}}',this.data)
+          // console.log($('#summernote').val());
+          await axios.post('{{route('backoffice.promosi-kesehatan.save')}}',{
+            title: this.data.title,
+            body: $('#summernote').val()
+          })
           .then(response=>{
             if(response.data.status!=1){
               Swal.fire({

@@ -32,11 +32,13 @@ class PromosiKesehatanController extends BackOfficeController
 		$body = request()->input('body');
 
 		$data = [
+			'date' => now(),
 			'title' => $title,
 			'body' => $body,
-			'show_bidan' => 1,
-			'show_pasien' => 1,
+			'show_bidan' => '1',
+			'show_pasien' => '1',
 		];
+
 		if (!empty($id)) {
 			PromosiKesehatan::where(['id' => $id])->update($data);
 		} else {
