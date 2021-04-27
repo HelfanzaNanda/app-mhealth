@@ -44,7 +44,41 @@
 
 @push('scripts')
 <script type="text/javascript">
-  function Delete(x) {
-  }
+  function Delete(kategoriID) {
+          let url = "{{ route('backoffice.kategori.delete', '')}}"+"/"+kategoriID;
+          Swal.fire({
+              title: 'Are you sure ?',
+              text: "You won't be able to revert this !",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+              if (result) {
+                axios.delete(url)
+                  .then(res=> {
+                      if(res.data.status!=1){
+                          Swal.fire({
+                              icon:'warning',
+                              text:res.data.msg
+                          })
+                          return
+                      }
+                      Swal.fire({
+                          icon:'success',
+                          text:'Prubahan disimpan'
+                      }).then(res=>{
+                          $('#datatable').DataTable().ajax.reload()
+                      })
+                  }).catch(error=>{
+                      Swal.fire({
+                          icon:'warning',
+                          text:error
+                      })
+                  })
+              }
+          })
+        }
 </script>
 @endpush

@@ -17,8 +17,11 @@ class KategoriController extends Controller
             ->addColumn('_buttons', function ($row) {
                 $editurl = route('backoffice.kategori.edit', $row->id);
                 // $deleteurl = route('backoffice.kategori.delete', $row->id);
-                return "<a class=\"btn btn-xs btn-info\" href=\"{$editurl}\"><i class=\"fa fa-edit\"></i> Edit</a>
-                <a class=\"btn btn-xs btn-danger\" onclick=\"Delete({$row->id})\"><i class=\"fa fa-trash\"></i> Delete</a>";
+                $btn = '<a class="btn btn-xs btn-info" href="'.$editurl.'"><i class="fa fa-edit"></i> Edit</a>';
+                $btn .= '<a class="btn btn-xs btn-danger" onclick="Delete('.$row->id.')"><i class="fa fa-trash"></i> Delete</a>';
+                return $btn;
+                // return "<a class=\"btn btn-xs btn-info\" href=\"{$editurl}\"><i class=\"fa fa-edit\"></i> Edit</a>
+                // <a class=\"btn btn-xs btn-danger\" href=\"#\" @click=\"Delete({$row->id})\"><i class=\"fa fa-trash\"></i> Delete</a>";
             })
             ->rawColumns(['_buttons']);
 
@@ -46,8 +49,7 @@ class KategoriController extends Controller
 
     public function delete($id)
     {
-        $data = Kategori::find($id);
-        $data->delete();
+        Kategori::destroy($id);
         return response()->json(['status' => 1]);
     }
 

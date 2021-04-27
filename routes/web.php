@@ -42,6 +42,8 @@ Route::group(['prefix' => 'pasien', 'as' => 'pasien.'], function () {
         Route::get('/', 'Frontend\ProfileController@index')->name('index');
         Route::get('/modal/identity', 'Frontend\ProfileController@identity')->name('modal.identity');
         Route::get('/modal/edit', 'Frontend\ProfileController@edit')->name('modal.edit');
+        Route::get('/modal/password', 'Frontend\ProfileController@showFormChangePassowrd')->name('modal.password.change');
+        Route::post('/modal/password', 'Frontend\ProfileController@changePassword')->name('password.change');
         Route::post('/update', 'Frontend\ProfileController@update')->name('update');
     });
 
@@ -116,7 +118,7 @@ Route::group(['prefix' => 'backoffice', 'as' => 'backoffice.'], function () {
         Route::get('insert', 'BackOffice\KategoriController@insert')->name('insert');
         Route::get('edit/{userid}', 'BackOffice\KategoriController@edit')->name('edit');
         Route::post('/save', 'BackOffice\KategoriController@save')->name('save');
-        Route::post('/delete', 'BackOffice\KategoriController@delete')->name('delete');
+        Route::delete('/delete/{categoryId}', 'BackOffice\KategoriController@delete')->name('delete');
     });
 
     Route::group(['prefix' => 'users', 'as' => 'users.'], function () {

@@ -11,6 +11,9 @@ use App\Models\Provinsi;
 use App\Models\PasienProfile;
 use App\Models\BidanProfile;
 use App\Http\Controllers\FrontendController;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
+
 class ProfileController extends FrontendController
 {
 	public function index($role=''){
@@ -61,6 +64,26 @@ class ProfileController extends FrontendController
 			'suku'=>strtoupper(request()->input('suku')),
 
 		]);
+		return response()->json(['status'=>1]);
+	}
+
+	public function showFormChangePassowrd()
+	{
+		return view('frontend.pasien.profile.change_password');
+	}
+
+	public function changePassword(Request $request)
+	{
+
+		$request->validate([
+			'password' => 'min:6|required|confirmed'
+		]);
+		$userid = $this->jwt_data['uid'];
+		$user = User::where('id',$userid)->first();
+		$user->update([
+			'password' => md5($request->password)
+		]);
+
 		return response()->json(['status'=>1]);
 	}
 	

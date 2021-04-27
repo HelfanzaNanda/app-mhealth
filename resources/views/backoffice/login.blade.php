@@ -60,7 +60,6 @@
         if(response){
           setTimeout(()=>{
             window.location.href="{{url('/')}}";
-
           },1000);
         }
       })
