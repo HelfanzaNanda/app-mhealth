@@ -1,0 +1,16 @@
+sudo: required
+dist: xenial
+addons:
+  chrome: stable
+  firefox: latest
+language: node_js
+services:
+- xvfb
+node_js:
+- '12'
+cache:
+- node_modules
+install:
+- npm install
+script:
+- npm run coverage && npm t -- --browsers=Firefox

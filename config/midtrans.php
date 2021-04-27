@@ -1,0 +1,8 @@
+<?php
+	
+	return [
+		'MIDTRANS_SERVER_KEY' => env('MIDTRANS_SERVER_KEY', ''),
+		'MIDTRANS_IS_PRODUCTION' => env('MIDTRANS_IS_PRODUCTION', false),
+		'MIDTRANS_IS_SANITIZED' => env('MIDTRANS_IS_SANITIZED', true),
+		'MIDTRANS_IS_3DS' => env('MIDTRANS_IS_3DS', true)
+	];
