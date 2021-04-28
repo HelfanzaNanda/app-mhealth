@@ -18,35 +18,33 @@ class PromosiKesehatanController extends BackOfficeController
 
 		$data = PromosiKesehatan::all();
 		$datatables = datatables($data)
+			->addColumn('recommended', function ($row) {
+				$input = '<div class="form-check">';
+				$input .= '<input type="checkbox" onchange="recommended(this, ' . $row->id . ')" class="checkbox" ' . ($row->recommended ? 'checked' : '') . ' id="checkbox-' . $row->id . '">';
+				$input .= '</div>';
+				return $input;
+			})
 			->addColumn('_buttons', function ($row) {
 				$editurl = route('backoffice.promosi-kesehatan.edit', $row->id);
 				$btn = '<a class="btn btn-xs btn-info" href="' . $editurl . '"><i class="fa fa-edit"></i> Edit</a>';
 				$btn .= '<a class="btn btn-xs btn-danger" onclick="Delete(' . $row->id . ')"><i class="fa fa-trash"></i> Delete</a>';
 				return $btn;
 			})
-			->rawColumns(['_buttons']);
+			->rawColumns(['_buttons'])
+			->escapeColumns([]);
 
 		return $datatables->toJson();
 	}
 	public function save()
 	{
 		$id = request()->input('id');
-		$title = request()->input('title');
-		$body = request()->input('body');
 
-		$data = [
-			'date' => now(),
-			'title' => $title,
-			'body' => $body,
-			'show_bidan' => '1',
-			'show_pasien' => '1',
-		];
-
-		if (!empty($id)) {
-			PromosiKesehatan::where(['id' => $id])->update($data);
-		} else {
-			PromosiKesehatan::insert($data);
-		}
+		PromosiKesehatan::updateOrCreate(['id' => $id], [
+			'date' => request()->input('date'),
+			'kategori_id' => request()->input('kategori_id'),
+			'title' => request()->input('title'),
+			'body' => request()->input('body')
+		]);
 		return response()->json(['status' => 1]);
 	}
 

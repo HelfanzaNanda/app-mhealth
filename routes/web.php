@@ -52,6 +52,13 @@ Route::group(['prefix' => 'pasien', 'as' => 'pasien.'], function () {
     Route::get('modal/consultation', 'Frontend\PasienController@consultation')->name('modal.consultation');
     Route::get('modal/health_records', 'Frontend\PasienController@health_records')->name('modal.health_records');
     Route::get('modal/pregnancy_test', 'Frontend\PasienController@pregnancy_test')->name('modal.pregnancy_test');
+    Route::get('modal/contraception_history', 'Frontend\PasienController@contraception_history')->name('modal.contraception_history');
+    Route::get('modal/health_history', 'Frontend\PasienController@health_history')->name('modal.health_history');
+
+    Route::post('contraception_history/save', 'Frontend\PasienRiwayatKontrasepsiController@save')->name('contraception_history.save');
+    Route::post('health_history/save', 'Frontend\PasienRiwayatKesehatanController@save')->name('health_history.save');
+    Route::delete('/delete/{id}', 'Frontend\PasienRiwayatKesehatanController@delete')->name('health_history.delete');
+    Route::get('/health_history/data', 'Frontend\PasienRiwayatKesehatanController@getData')->name('health_history.data');
 });
 
 

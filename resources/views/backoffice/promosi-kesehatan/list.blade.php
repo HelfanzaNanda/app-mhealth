@@ -31,11 +31,11 @@
           @include('backoffice.components.datatable-default',[
           'url'=>route('backoffice.promosi-kesehatan.datatables'),
           'columns'=>[
-          'recommended'=>'<th>Rekomendasi</th>',
-          'date'=>'<th>Tanggal</th>',
-          'title'=>'<th>Judul</th>',
-          'body'=>'<th>Isi</th>',
-          '_buttons'=>'<th></th>'
+            'recommended'=>'<th>Rekomendasi</th>',
+            'date'=>'<th>Tanggal</th>',
+            'title'=>'<th>Judul</th>',
+            'body'=>'<th>Isi</th>',
+            '_buttons'=>'<th></th>'
           ],
           ])
         </div>
@@ -83,7 +83,6 @@
         }
     })
   }
-
   async function recommended(input, id) { 
     const url = "{{ route('backoffice.promosi-kesehatan.recommended', '') }}"+"/"+id;
     const response = await axios.get(url)

@@ -13,7 +13,7 @@
 @section('content')
 <div id="content">
   <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
-    <a href="{{route('backoffice.users.index')}}"><i class="fa fa-arrow-left"></i> Back</a>
+    <a href="{{route('backoffice.promosi-kesehatan.index')}}"><i class="fa fa-arrow-left"></i> Back</a>
   </div>
   <div class="loading" style="display: none">
     <div class="card">
@@ -32,10 +32,27 @@
             </h5>
           </div>
           <div class="card-body">
-            <div class="row">
-              <label class="col-12 col-md-3 mt-2">Judul</label>
-              <div class="col-12 col-md-9">
-                <input type="text" id="title" v-model="data.title" class="form-control" placeholder="Judul">
+            <form id="pk-form" action="">
+              @csrf
+              <input type="hidden" name="id" value="{{ $data['id'] }}">
+              <div class="row">
+                <label class="col-12 col-md-3 mt-2">Kategori</label>
+                <div class="col-12 col-md-9">
+                  <select name="kategori_id" id="">
+                    <option value="">- Pilih Kategori -</option>
+                    @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" {{ $category->id == $data['kategori_id'] ? 'selected' : '' }}>
+                      {{ $category->kategori }}
+                    </option>
+                    @endforeach
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <label class="col-12 col-md-3 mt-2">Tanggal</label>
+                <div class="col-12 col-md-9">
+                  <input type="date" name="date" class="form-control" placeholder="Tanggal" value="{{ $data['date'] }}">
+                </div>
               </div>
               <div class="row">
                 <label class="col-12 col-md-3 mt-2">Judul</label>
@@ -50,7 +67,8 @@
                     placeholder="Konten">{!! $data['body'] !!}</textarea>
                 </div>
               </div>
-            </div>
+            </form>
+
           </div>
         </div>
         <div class="card">
@@ -68,17 +86,18 @@
 @endsection
 
 @push('scripts')
-
 <script type="text/javascript">
   $(document).ready(function() {
     $('.summernote').summernote({
         height: 100
     });
   });
-
-          await axios.post('{{route('backoffice.kategori.save')}}',this.data)
-          .then(response=>{
-            if(response.data.status!=1){
+  function save(back = false){
+        let form = new FormData($('#pk-form')[0]);
+        axios.post('{{route('backoffice.promosi-kesehatan.save')}}',form)
+        .then(response => {
+          console.log(response);
+          if(response.data.status!=1){
               Swal.fire({
                 icon:'warning',
                 text:response.data.msg
@@ -92,20 +111,17 @@
               timer:2000
             }).then(res=>{
               if(back){
-                window.location.href='{{route('backoffice.kategori.index')}}';
+                window.location.href='{{route('backoffice.promosi-kesehatan.index')}}';
                 return
               }
-              window.location.href='{{route('backoffice.kategori.insert')}}';
+              window.location.href='{{route('backoffice.promosi-kesehatan.insert')}}';
             });
-          })
-          .catch(error=>{
-            console.log(error)
-          })
-          this.isSaving=false;
-        },
-      },
-      updated(){
-      }
-    })
+        }).catch(error=>{
+            Swal.fire({
+                icon:'warning',
+                text:error
+            })
+        })
+    }
 </script>
 @endpush
