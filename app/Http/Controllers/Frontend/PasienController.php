@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Frontend;
+
 use Guzzle;
 use Requset;
 use Route;
@@ -8,32 +9,52 @@ use DB;
 use App\Models\User;
 use App\Models\PromosiKesehatan;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Models\PasienRiwayatKesehatan;
+
 class PasienController extends HomeController
 {
-	public function home(){
+	public function home()
+	{
 		return view('frontend.pasien.home.index');
 	}
 
 
-	public function health_education_get_content(){
-		PromosiKesehatan::orderBy('date','DESC')->get();
+	public function health_education_get_content()
+	{
+		PromosiKesehatan::orderBy('date', 'DESC')->get();
 
-		return view('frontend.pasien.health_education.__items',['data'=>$data]);
+		return view('frontend.pasien.health_education.__items', ['data' => $data]);
 	}
 
 
 
 
-	public function diary(){
+	public function diary()
+	{
 		return view('frontend.pasien.modal.diary.index');
 	}
-	public function health_records(){
+	public function health_records()
+	{
 		return view('frontend.pasien.modal.health_records.index');
 	}
-	public function consultation(){
+	public function consultation()
+	{
 		return view('frontend.pasien.modal.consultation.index');
 	}
-	public function pregnancy_test(){
+	public function pregnancy_test()
+	{
 		return view('frontend.pasien.modal.pregnancy_test.index');
+	}
+
+	public function contraception_history()
+	{
+		return view('frontend.pasien.modal.contraception_history.index');
+	}
+
+	public function health_history()
+	{
+		$userID = $this->jwt_data['uid'];
+		$data = PasienRiwayatKesehatan::where('pasienid', $userID)->get();
+		return view('frontend.pasien.modal.health_history.index', ['data' => $data]);
 	}
 }

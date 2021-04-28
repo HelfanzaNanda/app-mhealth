@@ -18,17 +18,17 @@ class PromosiKesehatanController extends BackOfficeController
 
 		$data = PromosiKesehatan::all();
 		$datatables = datatables($data)
-			->addColumn('recommended', function($row){
+			->addColumn('recommended', function ($row) {
 				$input = '<div class="form-check">';
-				$input .= '<input type="checkbox" onchange="recommended(this, '.$row->id.')" class="checkbox" '.($row->recommended ? 'checked' : '').' id="checkbox-'.$row->id.'">';
+				$input .= '<input type="checkbox" onchange="recommended(this, ' . $row->id . ')" class="checkbox" ' . ($row->recommended ? 'checked' : '') . ' id="checkbox-' . $row->id . '">';
 				$input .= '</div>';
 				return $input;
 			})
 			->addColumn('_buttons', function ($row) {
 				$editurl = route('backoffice.promosi-kesehatan.edit', $row->id);
-				$btn = '<a class="btn btn-xs btn-info" href="'.$editurl.'"><i class="fa fa-edit"></i> Edit</a>';
+				$btn = '<a class="btn btn-xs btn-info" href="' . $editurl . '"><i class="fa fa-edit"></i> Edit</a>';
 				$btn .= '<a class="btn btn-xs btn-danger" onclick="Delete(' . $row->id . ')"><i class="fa fa-trash"></i> Delete</a>';
-                return $btn;
+				return $btn;
 			})
 			->rawColumns(['_buttons'])
 			->escapeColumns([]);
@@ -38,7 +38,7 @@ class PromosiKesehatanController extends BackOfficeController
 	public function save()
 	{
 		$id = request()->input('id');
-		
+
 		PromosiKesehatan::updateOrCreate(['id' => $id], [
 			'date' => now(),
 			'kategori_id' => request()->input('kategori_id'),
@@ -57,7 +57,7 @@ class PromosiKesehatanController extends BackOfficeController
 		$data = PromosiKesehatan::firstWhere('id', $id);
 		$categories = Kategori::all();
 		return view('backoffice.promosi-kesehatan.form', [
-			'title' => "Edit - {$data->title}", 
+			'title' => "Edit - {$data->title}",
 			'data' => $data,
 			'categories' => $categories,
 		]);

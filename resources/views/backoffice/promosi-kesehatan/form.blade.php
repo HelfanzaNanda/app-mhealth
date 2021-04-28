@@ -13,7 +13,7 @@
 @section('content')
 <div id="content">
   <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
-    <a href="{{route('backoffice.users.index')}}"><i class="fa fa-arrow-left"></i> Back</a>
+    <a href="{{route('backoffice.promosi-kesehatan.index')}}"><i class="fa fa-arrow-left"></i> Back</a>
   </div>
   <div class="loading" style="display: none">
     <div class="card">
@@ -39,31 +39,30 @@
                 <label class="col-12 col-md-3 mt-2">Kategori</label>
                 <div class="col-12 col-md-9">
                   <select name="kategori_id" id="">
-                      <option value="">- Pilih Kategori -</option>
-                      @foreach ($categories as $category)
-                          <option value="{{ $category->id }}"
-                            {{ $category->id == $data['kategori_id'] ? 'selected' : '' }}>
-                            {{ $category->kategori }}
-                          </option>
-                      @endforeach
+                    <option value="">- Pilih Kategori -</option>
+                    @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" {{ $category->id == $data['kategori_id'] ? 'selected' : '' }}>
+                      {{ $category->kategori }}
+                    </option>
+                    @endforeach
                   </select>
                 </div>
               </div>
               <div class="row">
                 <label class="col-12 col-md-3 mt-2">Judul</label>
                 <div class="col-12 col-md-9">
-                  <input type="text" name="title" class="form-control" placeholder="Judul"
-                  value="{{ $data['title'] }}">
+                  <input type="text" name="title" class="form-control" placeholder="Judul" value="{{ $data['title'] }}">
                 </div>
               </div>
               <div class="row">
                 <label class="col-12 col-md-3 mt-2">Konten</label>
                 <div class="col-12 col-md-9">
-                  <textarea class="summernote form-control" id="body" name="body" placeholder="Konten">{!! $data['body'] !!}</textarea>
+                  <textarea class="summernote form-control" id="body" name="body"
+                    placeholder="Konten">{!! $data['body'] !!}</textarea>
                 </div>
               </div>
             </form>
-            
+
           </div>
         </div>
         <div class="card">

@@ -1,11 +1,10 @@
 @extends('frontend.layouts.app')
 @section('content')
-    <div class="profile-card mb-3">
-        <div class="container-mhealth">
-            <div class="col-12 shadow shadow-lg">
-                <div class="row justify-content-center">
-                    <div class="text-header font-size-18 font-weight-500 text-white">Profil</div>
-                </div>
+<div class="profile-card mb-3">
+    <div class="container-mhealth">
+        <div class="col-12 shadow shadow-lg">
+            <div class="row justify-content-center">
+                <div class="text-header font-size-18 font-weight-500 text-white">Profil</div>
             </div>
             <div class="row mt-62 mb-20">
                 <div class="thumb-lg mx-auto">
@@ -20,11 +19,14 @@
                 <button type="button" class="btn btn-block btn-profile bg-white text-active-pink font-weight-500" onclick="openIdentity()">Identitas Anda</button>
                 <button type="button" class="btn btn-block btn-profile bg-white text-active-pink font-weight-500" 
                 onclick="openHistoryCurrentPregnancy()">Riwayat Kehamilan Sekarang</button>
-                <button type="button" class="btn btn-block btn-profile bg-white text-active-pink font-weight-500" onclick="openFrame()">Riwayat Kontrasepsi</button>
+                <button type="button" class="btn btn-block btn-profile bg-white text-active-pink font-weight-500"
+                onclick="openFrame('{{ route('pasien.modal.contraception_history') }}', 'Riwayat Kontrasepsi')">Riwayat
+                Kontrasepsi</button>
                 <button type="button" class="btn btn-block btn-profile bg-white text-active-pink font-weight-500" onclick="openHistoryPrevPregnancy()">Riwayat Kehamilan Sebelumnya</button>
             </div>
         </div>
     </div>
+</div>
 
     <div class="container" >
         <div class="card">
@@ -35,6 +37,11 @@
                 </a>
                 <a href="#" onclick="openSocioeconomyHistory()" class="d-flex justify-content-between mb-29">
                     <span class="font-size-16 text-black font-weight-500">Riwayat Sosial Ekonomi</span>
+                    <img src="{{ asset('images/icon/next.png') }}" width="15" height="15">
+                </a>
+                <a href="#" onclick="openFrame('{{ route('pasien.modal.health_history') }}', 'Riwayat Kesehatan')"
+                    class="d-flex justify-content-between mb-29">
+                    <span class="font-size-16 text-black font-weight-500">Riwayat Kesehatan</span>
                     <img src="{{ asset('images/icon/next.png') }}" width="15" height="15">
                 </a>
                 <a href="#" class="d-flex justify-content-between mb-29">
@@ -48,9 +55,10 @@
             </div>
         </div>
     </div>
-    @push('scripts')
-    <script type="text/javascript">
-        function openIdentity(){
+</div>
+@push('scripts')
+<script type="text/javascript">
+    function openIdentity(){
             openFrame('{{route('pasien.profile.modal.identity')}}','Profil',{
                 button:{
                     text:'Edit',
