@@ -8,5 +8,6 @@ class PasienRiwayatSosial extends Model
 {
     protected $table = 'pasien_riwayat_sosial';
     public $timestamps = false;
+    protected $guarded = [];
 
 }

@@ -8,5 +8,6 @@ class PasienRiwayatKehamilan extends Model
 {
     protected $table = 'pasien_riwayat_kehamilan';
     public $timestamps = false;
+    protected $guarded = [];
 
 }

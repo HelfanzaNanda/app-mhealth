@@ -18,12 +18,11 @@
             </div>
             <div class="text-center">
                 <button type="button" class="btn btn-block btn-profile bg-white text-active-pink font-weight-500" onclick="openIdentity()">Identitas Anda</button>
-                <button type="button" class="btn btn-block btn-profile bg-white text-active-pink font-weight-500" onclick="openFrame()">Riwayat Kehamilan Sekarang</button>
+                <button type="button" class="btn btn-block btn-profile bg-white text-active-pink font-weight-500" 
+                onclick="openHistoryCurrentPregnancy()">Riwayat Kehamilan Sekarang</button>
                 <button type="button" class="btn btn-block btn-profile bg-white text-active-pink font-weight-500" onclick="openFrame()">Riwayat Kontrasepsi</button>
-                <button type="button" class="btn btn-block btn-profile bg-white text-active-pink font-weight-500" onclick="openFrame()">Riwayat Kehamilan Sebelumnya</button>
+                <button type="button" class="btn btn-block btn-profile bg-white text-active-pink font-weight-500" onclick="openHistoryPrevPregnancy()">Riwayat Kehamilan Sebelumnya</button>
             </div>
-
-
         </div>
     </div>
 
@@ -32,6 +31,10 @@
             <div class="card-body">
                 <a href="#" onclick="openFrame('{{ route('pasien.profile.modal.password.change') }}', 'Edit Password')" class="d-flex justify-content-between mb-29">
                     <span class="font-size-16 text-black font-weight-500">Ubah Password</span>
+                    <img src="{{ asset('images/icon/next.png') }}" width="15" height="15">
+                </a>
+                <a href="#" onclick="openSocioeconomyHistory()" class="d-flex justify-content-between mb-29">
+                    <span class="font-size-16 text-black font-weight-500">Riwayat Sosial Ekonomi</span>
                     <img src="{{ asset('images/icon/next.png') }}" width="15" height="15">
                 </a>
                 <a href="#" class="d-flex justify-content-between mb-29">
@@ -53,6 +56,39 @@
                     text:'Edit',
                     onclick:function(){
                         openFrame('{{route('pasien.profile.modal.edit')}}','Edit Profil')
+                    }
+                }
+            })
+        }
+
+        function openHistoryCurrentPregnancy(){
+            openFrame('{{ route('pasien.profile.modal.history_current_pregnancy') }}','Riwayat Kehamilan Sekarang',{
+                button:{
+                    text:'Edit',
+                    onclick:function(){
+                        openFrame('{{route('pasien.profile.modal.history_current_pregnancy.edit')}}','Edit Riwayat Kehamilan Sekarang')
+                    }
+                }
+            })
+        }
+
+        function openHistoryPrevPregnancy(){
+            openFrame('{{ route('pasien.profile.modal.history_prev_pregnancy') }}','Riwayat Kehamilan',{
+                button:{
+                    text:'Tambah',
+                    onclick:function(){
+                        openFrame('{{route('pasien.profile.modal.history_prev_pregnancy.create')}}','Tambah Riwayat Kehamilan Sebelumnya')
+                    }
+                }
+            })
+        }
+
+        function openSocioeconomyHistory(){
+            openFrame('{{ route('pasien.profile.modal.socioeconomic_history') }}','Riwayat Sosial Ekonomi',{
+                button:{
+                    text:'Tambah',
+                    onclick:function(){
+                        openFrame('{{route('pasien.profile.modal.socioeconomic_history.edit')}}','Edit Riwayat Sosial Ekonomi')
                     }
                 }
             })

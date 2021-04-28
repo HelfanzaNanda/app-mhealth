@@ -8,5 +8,6 @@ class PasienKehamilan extends Model
 {
     protected $table = 'pasien_kehamilan';
     public $timestamps = false;
+    protected $guarded = [];
 
 }

@@ -50,13 +50,6 @@
                 </div>
               </div>
               <div class="row">
-                <label class="col-12 col-md-3 mt-2">Tanggal</label>
-                <div class="col-12 col-md-9">
-                  <input type="date" name="date" class="form-control" placeholder="Tanggal"
-                  value="{{ $data['date'] }}">
-                </div>
-              </div>
-              <div class="row">
                 <label class="col-12 col-md-3 mt-2">Judul</label>
                 <div class="col-12 col-md-9">
                   <input type="text" name="title" class="form-control" placeholder="Judul"

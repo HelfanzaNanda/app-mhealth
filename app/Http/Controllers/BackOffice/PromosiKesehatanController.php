@@ -40,7 +40,7 @@ class PromosiKesehatanController extends BackOfficeController
 		$id = request()->input('id');
 		
 		PromosiKesehatan::updateOrCreate(['id' => $id], [
-			'date' => request()->input('date'),
+			'date' => now(),
 			'kategori_id' => request()->input('kategori_id'),
 			'title' => request()->input('title'),
 			'body' => request()->input('body')
@@ -72,7 +72,6 @@ class PromosiKesehatanController extends BackOfficeController
 			'data' => [
 				'kategori_id' => '',
 				'id' => '',
-				'date' => '',
 				'title' => '',
 				'body' => '',
 			]
