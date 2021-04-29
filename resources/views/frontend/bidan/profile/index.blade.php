@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="text-white text-center mt-3">
-                        <h2 class="bidan-name">Auristela Allisya</h2>
+                        <h2 class="bidan-name">{{ $data->fullname }}</h2>
                         <h5 class="text-pink font-size-18">Bidan</h5>
                     </div>
                     <div class="text-center mx-2">

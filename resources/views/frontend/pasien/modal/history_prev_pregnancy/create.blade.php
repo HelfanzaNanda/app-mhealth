@@ -69,7 +69,7 @@
     <script type="text/javascript">
 
         async function simpan(){
-            const url = "{{route('pasien.profile.modal.history_prev_pregnancy.store')}}"
+            const url = "{{route('pasien.modal.history_prev_pregnancy.store')}}"
             const form = new FormData($('#form-edit')[0]);
             try {
                 const response = await axios.post(url,form)
@@ -81,7 +81,6 @@
                 Swal.fire({ icon:'success', text:'Perubahan disimpan' })
                 .then( res =>{
                     window.top.backButton()
-                    //window.location.href = "{{ route('pasien.profile.index') }}"
                 })
                 
             } catch (error) {

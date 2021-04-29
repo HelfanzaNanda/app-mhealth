@@ -7,7 +7,9 @@
                 @csrf
                 <div class="form-group">
                     <label for="">Nama</label>
-                    <input type="text" name="nama" id="nama" class="form-control font-size-16 form-mhealth" placeholder="Nama Lengkap">
+                    <input type="text" name="nama" id="nama" 
+                    class="form-control font-size-16 form-mhealth" placeholder="Nama Lengkap"
+                    value="{{ $user->fullname }}">
                 </div>
                 <div class="form-group">
                     <label for="">Tempat, Tanggal Lahir</label>
@@ -22,7 +24,8 @@
                 </div>
                 <div class="form-group">
                     <label for="">No HP</label>
-                    <input type="text" name="nohp" id="nohp" class="form-control font-size-16 form-mhealth" placeholder="08123456789">
+                    <input type="text" name="nohp" id="nohp" class="form-control font-size-16 form-mhealth" 
+                    placeholder="08123456789" value="{{ $user->nohp }}">
                 </div>
                 <div class="form-group">
                     <label for="">Agama</label>
@@ -64,7 +67,8 @@
                         </select>
                     </div>
                     <div class="mb-1">
-                        <textarea type="text" name="alamat" id="alamat" class="form-control font-size-16 form-mhealth" placeholder="Alamat" rows="5"></textarea>
+                        <textarea type="text" name="alamat" id="alamat" class="form-control font-size-16 form-mhealth" 
+                        placeholder="Alamat" rows="5">{{ $user->alamat }}</textarea>
                     </div>
                 </div>
 
@@ -173,7 +177,8 @@
                     icon:'success',
                     text:'Prubahan disimpan'
                 }).then(res=>{
-                    window.location.reload();
+                    window.top.backButton()
+                    //window.location.reload();
                 })
             }).catch(error=>{
                 Swal.fire({

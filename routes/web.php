@@ -45,19 +45,19 @@ Route::group(['prefix' => 'pasien', 'as' => 'pasien.'], function () {
         Route::get('/modal/password', 'Frontend\ProfileController@showFormChangePassowrd')->name('modal.password.change');
         Route::post('/modal/password', 'Frontend\ProfileController@changePassword')->name('password.change');
         Route::post('/update', 'Frontend\ProfileController@update')->name('update');
-
-        Route::get('/modal/history-current-pregnancy', 'Frontend\ProfileController@history_current_pregnancy')->name('modal.history_current_pregnancy');
-        Route::get('/modal/history-current-pregnancy/edit', 'Frontend\ProfileController@edit_history_current_pregnancy')->name('modal.history_current_pregnancy.edit');
-        Route::post('/modal/history-current-pregnancy/{id}', 'Frontend\ProfileController@change_history_current_pregnancy')->name('modal.history_current_pregnancy.change');
-
-        Route::get('/modal/history-prev-pregnancy', 'Frontend\ProfileController@history_prev_pregnancy')->name('modal.history_prev_pregnancy');
-        Route::get('/modal/history-prev-pregnancy/create', 'Frontend\ProfileController@create_history_prev_pregnancy')->name('modal.history_prev_pregnancy.create');
-        Route::post('/modal/history-prev-pregnancy/create', 'Frontend\ProfileController@store_history_prev_pregnancy')->name('modal.history_prev_pregnancy.store');
-
-        Route::get('/modal/socioeconomic-history', 'Frontend\ProfileController@socioeconomic_history')->name('modal.socioeconomic_history');
-        Route::get('/modal/socioeconomic-history/edit', 'Frontend\ProfileController@edit_socioeconomic_history')->name('modal.socioeconomic_history.edit');
-        Route::post('/modal/socioeconomic-history/edit/{id?}', 'Frontend\ProfileController@update_socioeconomic_history')->name('modal.socioeconomic_history.update');
     });
+
+    Route::get('/modal/history-current-pregnancy', 'Frontend\Pasien\RiwayatKehamilanSaatIniController@index')->name('modal.history_current_pregnancy');
+    Route::get('/modal/history-current-pregnancy/edit', 'Frontend\Pasien\RiwayatKehamilanSaatIniController@edit')->name('modal.history_current_pregnancy.edit');
+    Route::post('/modal/history-current-pregnancy/{id}', 'Frontend\Pasien\RiwayatKehamilanSaatIniController@update')->name('modal.history_current_pregnancy.change');
+
+    Route::get('/modal/history-prev-pregnancy', 'Frontend\Pasien\RiwayatKehamilanSebelumnyaController@index')->name('modal.history_prev_pregnancy');
+    Route::get('/modal/history-prev-pregnancy/create', 'Frontend\Pasien\RiwayatKehamilanSebelumnyaController@create')->name('modal.history_prev_pregnancy.create');
+    Route::post('/modal/history-prev-pregnancy/create', 'Frontend\Pasien\RiwayatKehamilanSebelumnyaController@store')->name('modal.history_prev_pregnancy.store');
+
+    Route::get('/modal/socioeconomic-history', 'Frontend\Pasien\RiwayatSosialEkonomiController@index')->name('modal.socioeconomic_history');
+    Route::get('/modal/socioeconomic-history/edit', 'Frontend\Pasien\RiwayatSosialEkonomiController@edit')->name('modal.socioeconomic_history.edit');
+    Route::post('/modal/socioeconomic-history/edit/{id?}', 'Frontend\Pasien\RiwayatSosialEkonomiController@update')->name('modal.socioeconomic_history.update');
 
 
     Route::get('modal/diary', 'Frontend\PasienController@diary')->name('modal.diary');

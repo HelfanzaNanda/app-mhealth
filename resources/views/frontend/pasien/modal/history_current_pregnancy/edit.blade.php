@@ -134,7 +134,7 @@
 
         async function simpan(){
             const id = "{{ $data->id }}"
-            const url = "{{route('pasien.profile.modal.history_current_pregnancy.change', '')}}"+"/"+id
+            const url = "{{route('pasien.modal.history_current_pregnancy.change', '')}}"+"/"+id
             const form = new FormData($('#form-edit')[0]);
             try {
                 const response = await axios.post(url,form)

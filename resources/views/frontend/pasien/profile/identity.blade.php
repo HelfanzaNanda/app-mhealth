@@ -7,7 +7,7 @@
             <div class="card-body">
                 <div class="form-group">
                     <label style="color: #bfbfbf">Nama</label>
-                    <h6>{{$data->nama}}</h6>
+                    <h6>{{$user->fullname}}</h6>
                 </div>
                 <div class="form-group">
                     <label style="color: #bfbfbf">Tempat, Tanggal Lahir</label>
@@ -23,15 +23,15 @@
                 </div>
                 <div class="form-group">
                     <label style="color: #bfbfbf">Alamat</label>
-                    <h6>{{$data->alamat}} <br/>
-                        {{$data->kelurahan->kelurahanName??''}}, 
-                        {{$data->kecamatan->kecamatanName??''}}, 
-                        {{$data->kabupaten->kabupatenName??''}}, 
-                        {{$data->provinsi->provinsiName??''}} </h6>
+                    <h6>{{$user->alamat}} <br/>
+                        {{$user->kelurahan->kelurahanName??''}}, 
+                        {{$user->kecamatan->kecamatanName??''}}, 
+                        {{$user->kabupaten->kabupatenName??''}}, 
+                        {{$user->provinsi->provinsiName??''}} </h6>
                 </div>
                 <div class="form-group">
                     <label style="color: #bfbfbf">No. Hp</label>
-                    <h6>{{$data->nohp}}</h6>
+                    <h6>{{$user->nohp}}</h6>
                 </div>
                 <div class="form-group">
                     <label style="color: #bfbfbf">Situasi Keluarga</label>
@@ -45,10 +45,6 @@
                     <label style="color: #bfbfbf">Pekerjaan</label>
                     <h6>{{$data->pekerjaan}}</h6>
                 </div>
-                <!-- <div class="form-group">
-                    <label style="color: #bfbfbf">Data Keluarga</label>
-                    <h6>-</h6>
-                </div> -->
             </div>
         </div>
     </div>

@@ -70,33 +70,33 @@
         }
 
         function openHistoryCurrentPregnancy(){
-            openFrame('{{ route('pasien.profile.modal.history_current_pregnancy') }}','Riwayat Kehamilan Sekarang',{
+            openFrame('{{ route('pasien.modal.history_current_pregnancy') }}','Riwayat Kehamilan Sekarang',{
                 button:{
                     text:'Edit',
                     onclick:function(){
-                        openFrame('{{route('pasien.profile.modal.history_current_pregnancy.edit')}}','Edit Riwayat Kehamilan Sekarang')
+                        openFrame('{{route('pasien.modal.history_current_pregnancy.edit')}}','Edit Riwayat Kehamilan Sekarang')
                     }
                 }
             })
         }
 
         function openHistoryPrevPregnancy(){
-            openFrame('{{ route('pasien.profile.modal.history_prev_pregnancy') }}','Riwayat Kehamilan',{
+            openFrame('{{ route('pasien.modal.history_prev_pregnancy') }}','Riwayat Kehamilan',{
                 button:{
                     text:'Tambah',
                     onclick:function(){
-                        openFrame('{{route('pasien.profile.modal.history_prev_pregnancy.create')}}','Tambah Riwayat Kehamilan Sebelumnya')
+                        openFrame('{{route('pasien.modal.history_prev_pregnancy.create')}}','Tambah Riwayat Kehamilan Sebelumnya')
                     }
                 }
             })
         }
 
         function openSocioeconomyHistory(){
-            openFrame('{{ route('pasien.profile.modal.socioeconomic_history') }}','Riwayat Sosial Ekonomi',{
+            openFrame('{{ route('pasien.modal.socioeconomic_history') }}','Riwayat Sosial Ekonomi',{
                 button:{
                     text:'Tambah',
                     onclick:function(){
-                        openFrame('{{route('pasien.profile.modal.socioeconomic_history.edit')}}','Edit Riwayat Sosial Ekonomi')
+                        openFrame('{{route('pasien.modal.socioeconomic_history.edit')}}','Edit Riwayat Sosial Ekonomi')
                     }
                 }
             })
