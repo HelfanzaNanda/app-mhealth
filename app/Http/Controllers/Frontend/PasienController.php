@@ -9,7 +9,9 @@ use DB;
 use App\Models\User;
 use App\Models\PromosiKesehatan;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Models\PasienDiaryKehamilan;
 use App\Models\PasienRiwayatKesehatan;
+use Carbon\Carbon;
 
 class PasienController extends HomeController
 {
@@ -26,12 +28,12 @@ class PasienController extends HomeController
 		return view('frontend.pasien.health_education.__items', ['data' => $data]);
 	}
 
-
-
-
 	public function diary()
 	{
-		return view('frontend.pasien.modal.diary.index');
+		$userID = $this->jwt_data['uid'];
+		$data = PasienDiaryKehamilan::where('pasienid', $userID)->whereDate('created_at', Carbon::today())->first();
+		// dd($data);
+		return view('frontend.pasien.modal.diary.index', ['data' => $data]);
 	}
 	public function health_records()
 	{

@@ -69,8 +69,10 @@ Route::group(['prefix' => 'pasien', 'as' => 'pasien.'], function () {
 
     Route::post('contraception_history/save', 'Frontend\PasienRiwayatKontrasepsiController@save')->name('contraception_history.save');
     Route::post('health_history/save', 'Frontend\PasienRiwayatKesehatanController@save')->name('health_history.save');
-    Route::delete('/delete/{id}', 'Frontend\PasienRiwayatKesehatanController@delete')->name('health_history.delete');
+    Route::delete('health_history/delete/{id}', 'Frontend\PasienRiwayatKesehatanController@delete')->name('health_history.delete');
     Route::get('/health_history/data', 'Frontend\PasienRiwayatKesehatanController@getData')->name('health_history.data');
+
+    Route::post('/diary/save', 'Frontend\PasienDiaryKehamilanController@save')->name('diary.save');
 });
 
 
