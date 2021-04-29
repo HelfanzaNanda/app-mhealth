@@ -30,17 +30,26 @@ class ProfileController extends FrontendController
 				'data'=>$profile,
 				'user'=> $data
 			]);
+		}else{
+			return view('frontend.bidan.profile.identity',[
+				'user'=> $data
+			]);
 		}
 	}
 	public function edit(){
 		$data=User::where('id',$this->jwt_data['uid'])->first();
+		$list_provinsi = Provinsi::orderBy('provinsiName','ASC')->get();
 		if($data->role=='pasien'){
 			$profile = User::where('id',$data->id)->first();
-			$list_provinsi = Provinsi::orderBy('provinsiName','ASC')->get();
 			return view('frontend.pasien.profile.edit',[
 				'data'=>$profile, 
 				'list_provinsi'=>$list_provinsi,
 				'user' => $data
+			]);
+		}else{
+			return view('frontend.bidan.profile.edit',[
+				'list_provinsi'=>$list_provinsi,
+				'data' => $data
 			]);
 		}
 	}
@@ -67,6 +76,21 @@ class ProfileController extends FrontendController
 			'pekerjaan'=>strtoupper(request()->input('pekerjaan')),
 			'suku'=>strtoupper(request()->input('suku')),
 
+		]);
+		return response()->json(['status'=>1]);
+	}
+
+	public function updateBidan(){
+		$userid = $this->jwt_data['uid'];
+		User::where('id',$userid)->update([
+			'sipb'=>request()->input('sipb'),
+			'fullname'=>request()->input('nama'),
+			'alamat'=>request()->input('alamat'),
+			'nohp'=>request()->input('nohp'),
+			'provinsiid'=>request()->input('provinsiid'),
+			'kabupatenid'=>request()->input('kabupatenid'),
+			'kecamatanid'=>request()->input('kecamatanid'),
+			'kelurahanid'=>request()->input('kelurahanid'),
 		]);
 		return response()->json(['status'=>1]);
 	}

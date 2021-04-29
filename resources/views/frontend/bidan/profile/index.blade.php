@@ -21,11 +21,11 @@
                         </div>
                     </div>
                     <div class="text-white text-center mt-3">
-                        <h2 class="bidan-name">{{ $data->fullname }}</h2>
+                        <div class="font-size-24 text-pink font-weight-700">{{$data->fullname}}</div>
                         <h5 class="text-pink font-size-18">Bidan</h5>
                     </div>
                     <div class="text-center mx-2">
-                        <button type="button" class="btn btn-block btn-profile">Identitas Anda</button>
+                        <button type="button" onclick="openIdentity()" class="btn btn-block btn-profile">Identitas Anda</button>
                     </div>
                 </div>
             </div>
@@ -35,5 +35,16 @@
 @endsection
 
 @push('scripts')
-
+    <script>
+        function openIdentity(){
+            openFrame('{{route('bidan.profile.modal.identity')}}','Profil',{
+                button:{
+                    text:'Edit',
+                    onclick:function(){
+                        openFrame('{{route('bidan.profile.modal.edit')}}','Edit Profil')
+                    }
+                }
+            })
+        }
+    </script>
 @endpush
