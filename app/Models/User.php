@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
@@ -31,5 +32,9 @@ class User extends Model
     }
     public function scopeWithAddress($query){
         return $query->with('kelurahan','kecamatan','kabupaten','provinsi');
+    }
+
+    public function getAgeAttribute() {
+        return Carbon::parse($this->attributes['tanggallahir'])->age;
     }
 }

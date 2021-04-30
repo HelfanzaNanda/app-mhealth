@@ -11,7 +11,9 @@ class BidanPasien extends Model
     public function bidan(){
     	return $this->hasOne('App\Models\BidanPasien','bidanid','bidanid');
     }
-    public function pasien(){
-    	return $this->hasOne('App\Models\PasienProfile','pasienid','pasienid');
+
+    public function ibuhamil()
+    {
+        return $this->belongsTo(User::class, 'pasienid','id');
     }
 }

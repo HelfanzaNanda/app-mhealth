@@ -24,15 +24,15 @@ class BidanPasienController extends FrontendController
 	public function load_items(){
 		$key = request()->input('key');
 		$filter = request()->input('filter');
-		$items = BidanPasien::with('pasien')
-				->whereHas('pasien',function($query)use($filter){
+		$items = BidanPasien::with('ibuhamil')
+				->whereHas('ibuhamil',function($query)use($filter){
 					if(!empty($filter)){
-						$query->where('nama','like',"%$filter%")
+						$query->where('fullname','like',"%$filter%")
 								->orWhere('nik','like',"%$filter%");
 					}
 				})
-				->join('pasien_profile','pasien_profile.pasienid','bidan_pasien.pasienid')
-				->orderBy('pasien_profile.nama','ASC')
+				->join('user','user.id','bidan_pasien.pasienid')
+				->orderBy('user.fullname','ASC')
 				->get();
 
 
@@ -48,6 +48,14 @@ class BidanPasienController extends FrontendController
 			'created_at'=>date("Y-m-d H:i:s")
 		]);
 		return response()->json(['status'=>1]);
+	}
+
+	public function profileIbuHamil($ibu_hamil_id)
+	{
+		$user = User::where('id', $ibu_hamil_id)->first();
+		return view('frontend.bidan.pasien.modal.profile', [
+			'user' => $user
+		]);
 	}
 	
 }

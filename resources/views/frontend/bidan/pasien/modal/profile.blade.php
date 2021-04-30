@@ -14,14 +14,14 @@
                     </div>
                 </div>
                 <div class="text-white text-center mt-3 mb-29">
-                    <div class="font-size-24 font-weight-700">Auristela Allisya</div>
-                    <div class="text-pink font-size-18">24 Tahun</div>
+                    <div class="font-size-24 font-weight-700">{{ $user->fullname }}</div>
+                    <div class="text-pink font-size-18">{{ $user->tanggallahir }}</div>
                 </div>
                 <div class="text-center">
-                    <button type="button" onclick="openFrame('{{route('bidan.pasien.identity')}}','Identitas Pasien')" class="btn btn-block btn-profile bg-white text-active-pink font-weight-500">Identitas Pasien</button>
-                    <button type="button" onclick="openFrame('{{route('bidan.pasien.identity')}}','Riwayat Kehamlan Sekarang')" class="btn btn-block btn-profile bg-white text-active-pink font-weight-500">Riwayat Kehamilan Sekarang</button>
-                    <button type="button" onclick="openFrame('{{route('bidan.pasien.identity')}}','Riwayat Kontrasepsi')" class="btn btn-block btn-profile bg-white text-active-pink font-weight-500">Riwayat Kontrasepsi</button>
-                    <button type="button" onclick="openFrame('{{route('bidan.pasien.identity')}}','Riwayat Kehamilan Sebelumnya')" class="btn btn-block btn-profile bg-white text-active-pink font-weight-500">Riwayat Kehamilan Sebelumnya</button>
+                    <button type="button" class="btn btn-block btn-profile bg-white text-active-pink font-weight-500">Identitas Pasien</button>
+                    <button type="button" class="btn btn-block btn-profile bg-white text-active-pink font-weight-500">Riwayat Kehamilan Sekarang</button>
+                    <button type="button" class="btn btn-block btn-profile bg-white text-active-pink font-weight-500">Riwayat Kontrasepsi</button>
+                    <button type="button" class="btn btn-block btn-profile bg-white text-active-pink font-weight-500">Riwayat Kehamilan Sebelumnya</button>
                 </div>
             </div>
         </div>

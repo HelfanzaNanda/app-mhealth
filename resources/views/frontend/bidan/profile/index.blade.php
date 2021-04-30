@@ -24,14 +24,26 @@
                         <div class="font-size-24 text-pink font-weight-700">{{$data->fullname}}</div>
                         <h5 class="text-pink font-size-18">Bidan</h5>
                     </div>
-                    <div class="text-center mx-2">
+                    <div class="text-center mx-2 mb-3">
                         <button type="button" onclick="openIdentity()" class="btn btn-block btn-profile">Identitas Anda</button>
+                    </div>
+                    <div class="text-center mx-2">
+                        <button type="button" class="btn btn-block btn-profile"
+                        onclick="openFrame('{{ route('bidan.profile.modal.password.change') }}', 'Edit Password')">
+                            Update Password
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
+
+        
     </div>
+
+   
 </div>
+
+
 @endsection
 
 @push('scripts')

@@ -97,7 +97,14 @@ class ProfileController extends FrontendController
 
 	public function showFormChangePassowrd()
 	{
-		return view('frontend.pasien.profile.change_password');
+		$userid = $this->jwt_data['uid'];
+		$user = User::where('id', $userid)->first();
+		if ($user->role == 'pasien') {
+			return view('frontend.pasien.profile.change_password');
+		}else{
+			return view('frontend.bidan.profile.change_password');
+		}
+		
 	}
 
 	public function changePassword(Request $request)

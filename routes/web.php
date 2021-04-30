@@ -87,6 +87,7 @@ Route::group(['prefix' => 'bidan', 'as' => 'bidan.'], function () {
         Route::get('/', 'Frontend\BidanPasienController@index')->name('index');
         Route::post('/load_items', 'Frontend\BidanPasienController@load_items')->name('load_items');
         Route::get('/modal/detail', 'Frontend\BidanPasienController@detail')->name('modal.detail');
+        Route::get('/modal/profile/{ibu_hamil_id}', 'Frontend\BidanPasienController@profileIbuHamil')->name('modal.profile');
         Route::get('/modal/insert', 'Frontend\BidanPasienController@insert')->name('modal.insert');
 
         Route::post('/save', 'Frontend\BidanPasienController@save')->name('save');
@@ -97,6 +98,8 @@ Route::group(['prefix' => 'bidan', 'as' => 'bidan.'], function () {
         Route::get('/modal/identity', 'Frontend\ProfileController@identity')->name('modal.identity');
         Route::get('/modal/edit', 'Frontend\ProfileController@edit')->name('modal.edit');
         Route::post('/update', 'Frontend\ProfileController@updateBidan')->name('update');
+        Route::get('/modal/password', 'Frontend\ProfileController@showFormChangePassowrd')->name('modal.password.change');
+        Route::post('/modal/password', 'Frontend\ProfileController@changePassword')->name('password.change');
     });
 
 

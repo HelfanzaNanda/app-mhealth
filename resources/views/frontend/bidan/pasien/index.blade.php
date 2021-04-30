@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div style="flex-grow: 1;overflow: auto;" id="pasien">
-                
+                {{-- @include('frontend.bidan.pasien.__items') --}}
             </div>
         </div>
     </div>
