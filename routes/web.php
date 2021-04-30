@@ -81,6 +81,7 @@ Route::group(['prefix' => 'bidan', 'as' => 'bidan.'], function () {
 
     Route::group(['prefix' => 'visit', 'as' => 'visit.'], function () {
         Route::get('/', 'Frontend\BidanController@visit')->name('index');
+        Route::post('/save', 'Frontend\BidanKunjunganController@save')->name('save');
     });
 
     Route::group(['prefix' => 'pasien', 'as' => 'pasien.'], function () {
