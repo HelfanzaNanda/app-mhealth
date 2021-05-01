@@ -20,7 +20,7 @@
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
                             <label class="form-check-label font-weight-500 font-size-16" for="flexCheckDefault1">
-                            Imunisasi TT
+                                Imunisasi TT
                             </label>
                         </div>
                     </div>
@@ -30,38 +30,58 @@
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">
                             <label class="form-check-label font-weight-500 font-size-16" for="flexCheckDefault2">
-                            Tablet Tambah Darah
+                                Tablet FE
                             </label>
                         </div>
                     </div>
                 </div>
                 <div class="card mb-3 card-action">
                     <div class="card-body">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3">
-                            <label class="form-check-label font-weight-500 font-size-16" for="flexCheckDefault3">
-                            Konseling
-                            </label>
+                        <label for="listObat[]">Obat</label>
+                        <div class="input-group mb-2 after-add-more">
+                            <input class="form-control py-2" type="text" name="listObat[]">
+                            <span class="input-group-append">
+                                <button class="btn btn-outline-primary" onclick="addMore()" type="button">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </span>
                         </div>
                     </div>
                 </div>
-                <div class="card mb-37 card-action">
-                    <div class="card-body">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault4">
-                            <label class="form-check-label font-weight-500 font-size-16" for="flexCheckDefault4">
-                            Rujukan
-                            </label>
-                        </div>
+
+                {{-- hide --}}
+                <div class="copy d-none">
+                    <div class="input-group mb-2">
+                        <input class="form-control py-2" type="text" name="listObat[]">
+                        <span class="input-group-append">
+                            <button class="btn btn-outline-danger remove" type="button">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </span>
                     </div>
                 </div>
-                <button class="btn btn-block bg-dark-pink btn-mhealth text-white" type="submit">Simpan</button>
+                <button class="btn btn-block bg-dark-pink btn-mhealth text-white" type="button">Simpan</button>
             </form>
         </div>
     </div>
-
-   
-    
-
 </div>
+
+
 @endsection
+
+@push('scripts')
+<script>
+    function addMore() {
+        console.log('haloo');
+        let html = $('.copy').html();
+        $('.after-add-more').after(html);
+        console.log('hehe');
+    }
+
+    $(document).on('click', '.remove', function() {
+        console.log('delete');
+        $(this).parent('.input-group').remove();
+        console.log('berhasil');
+    });
+</script>
+@endpush
