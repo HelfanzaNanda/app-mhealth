@@ -90,6 +90,7 @@ Route::group(['prefix' => 'bidan', 'as' => 'bidan.'], function () {
         Route::get('/modal/detail', 'Frontend\BidanPasienController@detail')->name('modal.detail');
         Route::get('/modal/profile/{ibu_hamil_id}', 'Frontend\BidanPasienController@profileIbuHamil')->name('modal.profile');
         Route::get('/modal/insert', 'Frontend\BidanPasienController@insert')->name('modal.insert');
+        Route::get('/modal/action/{ibu_hamilid}', 'Frontend\BidanPasienController@action')->name('modal.action');
 
         Route::post('/save', 'Frontend\BidanPasienController@save')->name('save');
     });
