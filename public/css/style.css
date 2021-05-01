@@ -56,6 +56,9 @@
     background: #F25287;
     color: #f1f1f1;
 }
+.w-75{
+    width: 75%;
+}
 .btn-mhealth{
     height: 53px;
 }

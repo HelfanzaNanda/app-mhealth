@@ -104,12 +104,10 @@ class ProfileController extends FrontendController
 		}else{
 			return view('frontend.bidan.profile.change_password');
 		}
-		
 	}
 
 	public function changePassword(Request $request)
 	{
-
 		$request->validate([
 			'password' => 'min:6|required|confirmed'
 		]);
