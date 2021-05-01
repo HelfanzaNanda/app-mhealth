@@ -8,6 +8,7 @@ class PemeriksaanLab extends Model
 {
     protected $table = 'pemeriksaan_lab';
     public $timestamps = false;
+    protected $guarded = [];
     public function pasien(){
     	return $this->hasOne('App\Models\PasienProfile','pasienid');
     }
