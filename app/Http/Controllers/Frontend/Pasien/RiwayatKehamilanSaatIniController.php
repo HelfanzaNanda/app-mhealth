@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Frontend\Pasien;
 use Illuminate\Http\Request;
 use App\Models\PasienKehamilan;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Frontend\HomeController;
 
-class RiwayatKehamilanSaatIniController extends Controller
+class RiwayatKehamilanSaatIniController extends HomeController
 {
     public function index()
 	{
