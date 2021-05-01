@@ -92,6 +92,9 @@ Route::group(['prefix' => 'bidan', 'as' => 'bidan.'], function () {
         Route::get('/modal/insert', 'Frontend\BidanPasienController@insert')->name('modal.insert');
         Route::get('/modal/action/{ibu_hamilid}', 'Frontend\BidanPasienController@action')->name('modal.action');
 
+        Route::get('/modal/lab-examination/{pasien_id}', 'Frontend\Bidan\LabExaminationController@index')->name('modal.lab.examination');
+        Route::post('/modal/lab-examination', 'Frontend\Bidan\LabExaminationController@store')->name('modal.lab.examination.store');
+
         Route::post('/save', 'Frontend\BidanPasienController@save')->name('save');
         Route::post('action/save', 'Frontend\BidanTindakanController@save')->name('action.save');
     });
