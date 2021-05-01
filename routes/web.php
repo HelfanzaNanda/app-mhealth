@@ -93,6 +93,7 @@ Route::group(['prefix' => 'bidan', 'as' => 'bidan.'], function () {
         Route::get('/modal/action/{ibu_hamilid}', 'Frontend\BidanPasienController@action')->name('modal.action');
 
         Route::post('/save', 'Frontend\BidanPasienController@save')->name('save');
+        Route::post('action/save', 'Frontend\BidanPasienController@save')->name('action.save');
     });
 
     Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {

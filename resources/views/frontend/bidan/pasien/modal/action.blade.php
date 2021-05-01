@@ -13,12 +13,14 @@
     </div>
     <div class="bg-grey pt-23" style="height: 86vh; overflow: auto">
         <div class="container-mhealth h-100">
-            <form action="">
+            <form action="{{ route('bidan.pasien.action.save') }}">
                 @csrf
+                <input type="hidden" name="ibuHamilId" value="{{ $ibuHamil->id }}">
                 <div class="card mb-3 card-action">
                     <div class="card-body">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
+                            <input class="form-check-input" name="imunisasi" type="checkbox" value=""
+                                id="flexCheckDefault1">
                             <label class="form-check-label font-weight-500 font-size-16" for="flexCheckDefault1">
                                 Imunisasi TT
                             </label>
@@ -28,7 +30,8 @@
                 <div class="card mb-3 card-action">
                     <div class="card-body">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">
+                            <input class="form-check-input" name="tablet" type="checkbox" value=""
+                                id="flexCheckDefault2">
                             <label class="form-check-label font-weight-500 font-size-16" for="flexCheckDefault2">
                                 Tablet FE
                             </label>
@@ -60,7 +63,7 @@
                         </span>
                     </div>
                 </div>
-                <button class="btn btn-block bg-dark-pink btn-mhealth text-white" type="button">Simpan</button>
+                <button class="btn btn-block bg-dark-pink btn-mhealth text-white" type="submit">Simpan</button>
             </form>
         </div>
     </div>
@@ -71,6 +74,10 @@
 
 @push('scripts')
 <script>
+    // function Simpan() {
+    //     console.log('save');
+    // }
+
     function addMore() {
         console.log('haloo');
         let html = $('.copy').html();
