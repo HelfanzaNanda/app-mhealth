@@ -5,39 +5,29 @@
     <div class="bg-grey pt-23 mt-1" style="height: 100vh">
         <div style="height: 88% !important; overflow: auto">
             <div class="container-mhealth messages" style="height: 100%">
-                @if ($status)
-                    @foreach ($messages as $message)
-                        @if ($message->pengirim == $user_id)
-                            <div class="row align-items-center flex-row-reverse mb-3">    
-                                <div class="card w-75 text-right" style="border-radius: 10px;">
-                                    <p style="padding: 5px; margin: 0">{{ $message->message }}</p>
-                                </div>
-                                <div class="mr-2 text-pink">{{ $message->status == 'read' ? 'read' : 'sent' }}</div>
-                            </div> 
-                        @else
-                            <div class="row mb-3">
-                                <div class="card w-75" style="border-radius: 10px;">
-                                    <p style="padding: 5px; margin: 0">{{ $message->message }}</p>
-                                </div>
+                @foreach ($messages as $message)
+                    @if ($message->pengirim == $user_id)
+                        <div class="row align-items-center flex-row-reverse mb-3">
+                            <div class="card w-75 text-right" style="border-radius: 10px;">
+                                <p style="padding: 5px; margin: 0">{{ $message->message }}</p>
                             </div>
-                        @endif
-                    @endforeach
-                @else
-                    <div class="row justify-content-center">
-                        <h6>Maaf Ibu belum terdaftar di bidan mana pun</h6>
-                    </div>
-                @endif
-                
-                
+                            <div class="mr-2 text-pink">{{ $message->status == 'read' ? 'read' : 'sent' }}</div>
+                        </div> 
+                    @else
+                        <div class="row mb-3">
+                            <div class="card w-75" style="border-radius: 10px;">
+                                <p style="padding: 5px; margin: 0">{{ $message->message }}</p>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
             </div>
             <div class="position-fixed" style="bottom: 0; left: 0; right: 0; padding: 0 25px">
-                @if ($status)
-                    <p style="margin: 0; margin-bottom: 3px"><i>ibu akan di hubungkan dengan bidan <b>{{ $kunjungan->bidan->fullname }}</b></i></p>
-                @endif
+                
             <div class="form-group w-100 has-warning has-feedback " >
                 <div class="input-group-mhealth">
                     <input type="text" class="bg-form-auth form-control
-                    font-size-16 form-mhealth input-message" {{ !$status ? 'disabled' : '' }}
+                    font-size-16 form-mhealth input-message"
                     placeholder="Tulis pesan anda ...">
                     <span class="form-control-feedback-right">
                         <img src="{{ asset('images/icon/send-button.png') }}" width="23" height="23">
@@ -62,7 +52,7 @@
 
         function showMessage(message) {
             let cardMessage = ''
-                cardMessage += '    <div class="row align-items-center flex-row-reverse mb-3">    '
+                cardMessage += '    <div class="row align-items-center flex-row-reverse mb-3">'
                 cardMessage += '        <div class="card w-75 text-right" style="border-radius: 10px;">'
                 cardMessage += '            <p style="padding: 5px; margin: 0">'+message+'</p>'
                 cardMessage += '        </div>'
@@ -72,10 +62,10 @@
         }
 
         async function sendMessage(message) {
-            const url = "{{ route('pasien.modal.consultation.sendmessage') }}"
+            const url = "{{ route('bidan.inbox.modal.sendmessage') }}"
             const data = {
                 message: message,
-                bidanid: "{{ $status ? $kunjungan->bidanid : '' }}"
+                pasienid: "{{ $kunjungan->pasienid }}"
             }
             try {
                 const response = await axios.post(url, data)
@@ -86,10 +76,6 @@
                 }
                 $('.messages').append(showMessage(message))
                 $('.input-message').val('')
-                // Swal.fire({ icon:'success', text:'Perubahan disimpan' })
-                // .then( res =>{ 
-                //     window.top.backButton()
-                // })
                 
             } catch (error) {
                 Swal.fire({ icon:'warning', text:error })

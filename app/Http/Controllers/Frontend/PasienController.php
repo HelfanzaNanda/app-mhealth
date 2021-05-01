@@ -39,10 +39,7 @@ class PasienController extends HomeController
 	{
 		return view('frontend.pasien.modal.health_records.index');
 	}
-	public function consultation()
-	{
-		return view('frontend.pasien.modal.consultation.index');
-	}
+	
 	public function pregnancy_test()
 	{
 		return view('frontend.pasien.modal.pregnancy_test.index');

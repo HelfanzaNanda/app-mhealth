@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Frontend\Pasien;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Frontend\HomeController;
 use App\Models\PasienRiwayatKehamilan;
 
-class RiwayatKehamilanSebelumnyaController extends Controller
+class RiwayatKehamilanSebelumnyaController extends HomeController
 {
     public function index()
 	{

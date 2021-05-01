@@ -8,4 +8,5 @@ class Inbox extends Model
 {
     protected $table = 'inbox';
     public $timestamps = false;
+    protected $guarded = [];
 }

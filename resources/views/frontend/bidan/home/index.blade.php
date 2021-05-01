@@ -7,7 +7,8 @@
             <div class="d-flex justify-content-between pt-3 mb-4">
                 <img src="{{ asset('images/logo-text.png') }}" height="31" width="116">
                 <div>
-                    <img src="{{ asset('images/message.png') }}" height="28" width="28.99" alt="">
+                    <img onclick="openFrame('{{ route('bidan.inbox.index') }}', 'Inbox')"
+                    src="{{ asset('images/message.png') }}" height="28" width="28.99" alt="">
                     <img src="{{ asset('images/notification.png') }}" height="25" width="25" alt="">
                 </div>
             </div>
@@ -59,3 +60,10 @@
         </div>
     </div>
 @endsection
+
+
+@push('scripts')
+    <script>
+        
+    </script>
+@endpush

@@ -61,7 +61,10 @@ Route::group(['prefix' => 'pasien', 'as' => 'pasien.'], function () {
 
 
     Route::get('modal/diary', 'Frontend\PasienController@diary')->name('modal.diary');
-    Route::get('modal/consultation', 'Frontend\PasienController@consultation')->name('modal.consultation');
+    
+    Route::get('modal/consultation', 'Frontend\Pasien\ConsultationController@index')->name('modal.consultation');
+    Route::post('modal/consultation', 'Frontend\Pasien\ConsultationController@sendMessage')->name('modal.consultation.sendmessage');
+    
     Route::get('modal/health_records', 'Frontend\PasienController@health_records')->name('modal.health_records');
     Route::get('modal/pregnancy_test', 'Frontend\PasienController@pregnancy_test')->name('modal.pregnancy_test');
     Route::get('modal/contraception_history', 'Frontend\PasienController@contraception_history')->name('modal.contraception_history');
@@ -78,6 +81,12 @@ Route::group(['prefix' => 'pasien', 'as' => 'pasien.'], function () {
 
 Route::group(['prefix' => 'bidan', 'as' => 'bidan.'], function () {
     Route::get('/', 'Frontend\BidanController@home')->name('home');
+
+    Route::group(['prefix' => 'inbox', 'as' => 'inbox.'], function () {
+        Route::get('/', 'Frontend\Bidan\InboxController@index')->name('index');
+        Route::get('/modal/chat/{id}', 'Frontend\Bidan\InboxController@showChat')->name('modal.chat');
+        Route::post('/modal/chat', 'Frontend\Bidan\InboxController@sendMessage')->name('modal.sendmessage');
+    });
 
     Route::group(['prefix' => 'visit', 'as' => 'visit.'], function () {
         Route::get('/', 'Frontend\BidanController@visit')->name('index');

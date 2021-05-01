@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Frontend\Pasien;
 use Illuminate\Http\Request;
 use App\Models\PasienRiwayatSosial;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Frontend\HomeController;
 
-class RiwayatSosialEkonomiController extends Controller
+class RiwayatSosialEkonomiController extends HomeController
 {
     public function index()
 	{
