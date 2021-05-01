@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="card mb-3 card-action">
-                    <div class="card-body">
+                    <div class="card-body items">
                         <label for="listObat[]">Obat</label>
                         <div class="input-group mb-2 after-add-more">
                             <input class="form-control py-2" type="text" name="listObat[]">
@@ -46,18 +46,6 @@
                                 </button>
                             </span>
                         </div>
-                    </div>
-                </div>
-
-                {{-- hide --}}
-                <div class="copy d-none">
-                    <div class="input-group mb-2">
-                        <input class="form-control py-2" type="text" name="listObat[]">
-                        <span class="input-group-append">
-                            <button class="btn btn-outline-danger remove" type="button">
-                                <i class="fa fa-times"></i>
-                            </button>
-                        </span>
                     </div>
                 </div>
                 <button class="btn btn-block bg-dark-pink btn-mhealth text-white" type="button">Simpan</button>
@@ -71,17 +59,28 @@
 
 @push('scripts')
 <script>
+    let index = 0
     function addMore() {
-        console.log('haloo');
-        let html = $('.copy').html();
-        $('.after-add-more').after(html);
-        console.log('hehe');
+        $('.items').append(addItem());
+        index++
     }
 
+    function addItem() { 
+        let item = ''
+            item  += '<div class="input-group mb-2 row-'+index+'">'
+            item  += '    <input class="form-control py-2" type="text" name="listObat[]">'
+            item  += '    <span class="input-group-append">'
+            item  += '        <button data-key="'+index+'" class="btn btn-outline-danger remove" type="button">'
+            item  += '            <i class="fa fa-times"></i>'
+            item  += '        </button>'
+            item  += '    </span>'
+            item  += '</div>'
+        return item
+     }
+
     $(document).on('click', '.remove', function() {
-        console.log('delete');
-        $(this).parent('.input-group').remove();
-        console.log('berhasil');
+        const key =$(this).data('key')
+        $('.row-'+key).remove();
     });
 </script>
 @endpush
