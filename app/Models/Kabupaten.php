@@ -8,4 +8,9 @@ class Kabupaten extends Model
 {
     protected $table = 'master_kabupaten';
     public $timestamps = false;
+
+    public function provinsi()
+    {
+        return $this->belongsTo(Provinsi::class, 'provinsiId', 'provinsiId');
+    }
 }

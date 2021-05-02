@@ -187,7 +187,12 @@ Route::group(['prefix' => 'backoffice', 'as' => 'backoffice.'], function () {
         Route::get('insert', 'BackOffice\FaskesController@insert')->name('insert');
         Route::post('/datatables', 'BackOffice\FaskesController@datatables')->name('datatables');
         Route::post('/save', 'BackOffice\FaskesController@save')->name('save');
-        Route::post('/delete', 'BackOffice\FaskesController@delete')->name('delete');
+        Route::delete('/delete/{id}', 'BackOffice\FaskesController@delete')->name('delete');
+
+        Route::get('/getProvinsi', 'BackOffice\FaskesController@getProvinsi')->name('getProvinsi');
+        Route::get('/getKabupaten/{provinsiId}', 'BackOffice\FaskesController@getKabupaten')->name('getKabupaten');
+        Route::get('/getKecamatan/{kabupatenId}', 'BackOffice\FaskesController@getKecamatan')->name('getKecamatan');
+        Route::get('/getKelurahan/{kecamatanId}', 'BackOffice\FaskesController@getKelurahan')->name('getKelurahan');
     });
 
     Route::group(['prefix' => 'rujukan', 'as' => 'rujukan.'], function () {
