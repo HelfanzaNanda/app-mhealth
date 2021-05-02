@@ -71,6 +71,12 @@
           <span class="link-title">Faskes</span>
         </a>
       </li>
+      <li class="nav-item {{ active_class(['faskes']) }}">
+        <a href="{{ url('backoffice/notifikasi') }}" class="nav-link">
+          <i class="link-icon" data-feather="user"></i>
+          <span class="link-title">Notifikasi</span>
+        </a>
+      </li>
 
     </ul>
   </div>

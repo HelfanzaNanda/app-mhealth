@@ -227,6 +227,13 @@ Route::group(['prefix' => 'backoffice', 'as' => 'backoffice.'], function () {
         Route::post('/delete', 'BackOffice\BannerController@delete')->name('delete');
     });
 
+    Route::group(['prefix' => 'notifikasi', 'as' => 'notifikasi.'], function () {
+        Route::get('/', 'BackOffice\NotifikasiController@index')->name('index');
+        Route::post('/datatables', 'BackOffice\NotifikasiController@datatables')->name('datatables');
+        Route::get('insert', 'BackOffice\NotifikasiController@insert')->name('insert');
+        Route::post('/save', 'BackOffice\NotifikasiController@save')->name('save');
+        Route::delete('/delete/{id}', 'BackOffice\NotifikasiController@delete')->name('delete');
+    });
 
 
 
