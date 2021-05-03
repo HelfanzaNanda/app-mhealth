@@ -79,18 +79,12 @@
             }
             try {
                 const response = await axios.post(url, data)
-                console.log(response);
                 if (response.data.status != 1) {
                     Swal.fire({ icon:'warning', text:res.data.msg })
                     return
                 }
                 $('.messages').append(showMessage(message))
                 $('.input-message').val('')
-                // Swal.fire({ icon:'success', text:'Perubahan disimpan' })
-                // .then( res =>{ 
-                //     window.top.backButton()
-                // })
-                
             } catch (error) {
                 Swal.fire({ icon:'warning', text:error })
             }    

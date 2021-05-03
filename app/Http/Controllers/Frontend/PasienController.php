@@ -12,12 +12,30 @@ use App\Http\Controllers\Frontend\HomeController;
 use App\Models\PasienDiaryKehamilan;
 use App\Models\PasienRiwayatKesehatan;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class PasienController extends HomeController
 {
 	public function home()
 	{
-		return view('frontend.pasien.home.index');
+		$userID = $this->jwt_data['uid'];
+		$user = User::where('id', $userID)
+		->where('lat', '!=', null)
+		->where('lng', '!=', null)->first();
+
+		$isGeoLocation = $user ? true : false;
+		return view('frontend.pasien.home.index', [
+			'isGeoLocation' => $isGeoLocation
+		]);
+	}
+
+	//pasien update lat lng
+	public function updateLatLng(Request $request)
+	{
+		//unset($request->_token);
+		$userID = $this->jwt_data['uid'];
+		User::where('id', $userID)->update($request->all());
+		return response()->json(['status'=>1]);
 	}
 
 

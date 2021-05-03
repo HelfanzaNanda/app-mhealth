@@ -11,7 +11,8 @@
                     </div>
                 </div>
                 <div class="mr-15">
-                    <img src="{{ asset('images/icon/notification.png') }}" width="25" height="25">
+                    <img  onclick="openFrame('{{route('pasien.modal.notifikasi')}}','Notifikasi')"
+                    src="{{ asset('images/icon/notification.png') }}" width="25" height="25">
                     {{-- <i class="fas fa-bell fa-lg text-white"></i> --}}
                 </div>
             </div>
@@ -118,3 +119,48 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+    <script>
+        const isGeoLocation = "{{ $isGeoLocation }}"
+        let messageConfirmation = 'Untuk memberikan layanan yang lebih untuk ibu hamil, '
+            messageConfirmation += 'izinkan Aplikasi mHealth untuk mengkakses Lokasi Kamu'
+        if (!isGeoLocation) {
+            Swal.fire({
+                text: messageConfirmation,
+                showCancelButton: true,
+                confirmButtonText: `OK`,
+                cancelButtonText: `Nanti Aja`,
+            }).then((result) => {
+                if (result) {
+                    getLatLng()
+                }
+            })
+        }
+
+        function getLatLng() { 
+            mapboxgl.accessToken = "{{ env('MAPBOX_ACCESS_TOKEN') }}"    
+            if ("geolocation" in navigator) { 
+                navigator.geolocation.getCurrentPosition(position => { 
+                    const lat = position.coords.latitude
+                    const lng = position.coords.longitude
+                    userUpdateLatLng(lat, lng)
+                }); 
+            }
+        }
+
+        async function userUpdateLatLng(lat, lng){
+            const data = { lat : lat, lng : lng }
+            const response = await axios.post('{{route('pasien.home.update.lat.lng')}}',data)
+            try {
+                if(response.data.status!=1){
+                    Swal.fire({ icon:'warning', text:response.data.msg }) 
+                    return
+                }
+            } catch (error) {
+                Swal.fire({ icon:'warning', text:error })
+            }
+        }
+    </script>
+@endpush
