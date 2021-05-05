@@ -68,7 +68,7 @@ Route::group(['prefix' => 'pasien', 'as' => 'pasien.'], function () {
 
     Route::get('modal/notifikasi', 'Frontend\Pasien\NotifikasiController@index')->name('modal.notifikasi');
     Route::get('modal/notifikasi/{id}', 'Frontend\Pasien\NotifikasiController@detail')->name('modal.notifikasi.detail');
-    
+
     Route::get('modal/health_records', 'Frontend\PasienController@health_records')->name('modal.health_records');
     Route::get('modal/pregnancy_test', 'Frontend\PasienController@pregnancy_test')->name('modal.pregnancy_test');
     Route::get('modal/contraception_history', 'Frontend\PasienController@contraception_history')->name('modal.contraception_history');
@@ -216,11 +216,12 @@ Route::group(['prefix' => 'backoffice', 'as' => 'backoffice.'], function () {
 
     Route::group(['prefix' => 'rujukan', 'as' => 'rujukan.'], function () {
         Route::get('/', 'BackOffice\RujukanController@index')->name('index');
-        Route::get('edit/{userid}', 'BackOffice\RujukanController@edit')->name('edit');
-        Route::get('insert', 'BackOffice\RujukanController@insert')->name('insert');
+        Route::get('detail/{userid}', 'BackOffice\RujukanController@detail')->name('detail');
+        // Route::get('insert', 'BackOffice\RujukanController@insert')->name('insert');
         Route::post('/datatables', 'BackOffice\RujukanController@datatables')->name('datatables');
         Route::post('/save', 'BackOffice\RujukanController@save')->name('save');
-        Route::post('/delete', 'BackOffice\RujukanController@delete')->name('delete');
+        // Route::post('/delete', 'BackOffice\RujukanController@delete')->name('delete');
+        Route::get('/download/surat-rujukan/{filename}', 'BackOffice\RujukanController@download')->name('download.surat-rujukan');
     });
 
     Route::group(['prefix' => 'kunjungan', 'as' => 'kunjungan.'], function () {

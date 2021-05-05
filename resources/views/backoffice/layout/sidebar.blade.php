@@ -18,8 +18,8 @@
           <span class="link-title">Dashboard</span>
         </a>
       </li>
-      <li class="nav-item {{ active_class(['users']) }}">
-        <a href="{{ url('backoffice/users') }}" class="nav-link">
+      <li class="nav-item {{ active_class(['rujukan']) }}">
+        <a href="{{ url('backoffice/rujukan') }}" class="nav-link">
           <i class="link-icon" data-feather="user"></i>
           <span class="link-title">Rujukan</span>
         </a>
