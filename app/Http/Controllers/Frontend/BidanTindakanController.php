@@ -17,6 +17,8 @@ class BidanTindakanController extends Controller
         $tablet = request()->input('tablet') == 'on' ? 1 : 0;
         $listObat = request()->input('listObat');
 
+        // dd(request()->all());
+
         Tindakan::create([
             'bidanid' => $bidanId,
             'pasienid' => $ibuHamilId,

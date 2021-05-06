@@ -15,12 +15,12 @@
         <div class="container-mhealth h-100">
             <form action="" id="tindakan_form">
                 @csrf
-                <input type="hidden" name="ibuHamilId" value="{{ $ibuHamil->id }}">
+                <input type="hidden" name="ibuHamilId" value="{{ $ibuHamil->id }}" id="ibuHamilId">
                 <div class="card mb-3 card-action">
                     <div class="card-body">
                         <div class="form-check">
-                            <input class="form-check-input" name="imunisasi" type="checkbox" id="flexCheckDefault1">
-                            <label class="form-check-label font-weight-500 font-size-16" for="flexCheckDefault1">
+                            <input class="form-check-input" name="imunisasi" type="checkbox" id="imunisasiCheckbox">
+                            <label class="form-check-label font-weight-500 font-size-16" for="imunisasiCheckbox">
                                 Imunisasi TT
                             </label>
                         </div>
@@ -29,20 +29,20 @@
                 <div class="card mb-3 card-action">
                     <div class="card-body">
                         <div class="form-check">
-                            <input class="form-check-input" name="tablet" type="checkbox" id="flexCheckDefault2">
-                            <label class="form-check-label font-weight-500 font-size-16" for="flexCheckDefault2">
+                            <input class="form-check-input" name="tablet" type="checkbox" id="tabletCheckbox">
+                            <label class="form-check-label font-weight-500 font-size-16" for="tabletCheckbox">
                                 Tablet FE
                             </label>
                         </div>
                     </div>
                 </div>
                 <div class="card mb-3 card-action">
-                    <div class="card-body items">
-                        <label for="listObat[]">Obat</label>
-                        <div class="input-group mb-2 after-add-more">
-                            <input class="form-control py-2" type="text" name="listObat[]">
+                    <div class="card-body" id="listItems">
+                        <label for="listObat[]" id="labelListObat">Obat</label>
+                        <div class="input-group mb-2">
+                            <input class="form-control py-2" type="text" id="inputList">
                             <span class="input-group-append">
-                                <button class="btn btn-outline-primary" onclick="addMore()" type="button">
+                                <button class="btn btn-outline-primary" onclick="addList()" type="button">
                                     <i class="fa fa-plus"></i>
                                 </button>
                             </span>
@@ -61,6 +61,47 @@
 
 @push('scripts')
 <script>
+    let index = 0;
+
+    function refreshForm() {
+        $('#ibuHamilId').val("");
+        $('#inputList').val("");
+        $('#inputList').val("");
+        $('#imunisasiCheckbox').prop("checked", false);
+        $('#tabletCheckbox').prop("checked", false);
+        for(let i = 0; i < index; i++) {
+            $('.row-'+i).remove();
+        }
+    }
+
+    function addList() {
+        const listValue = $('#inputList').val();
+        if(listValue != '') {
+            $('#alertListObat').remove();
+            $('#inputList').val("");
+            // console.log(listValue);
+            $('#listItems').append(addListItem(listValue));
+            index++;
+            console.log(index);
+        } else {
+            $('#labelListObat').after('<p class="text-danger" id="alertListObat"><small>Tulis nama obat dulu.</small></p>');
+        }
+
+    }
+
+    function addListItem(listValue) {
+        let item = ''
+            item  += '<div class="input-group mb-2 row-'+index+'">'
+            item  += '    <input class="form-control py-2" type="text" readonly name="listObat[]" value="'+listValue+'">'
+            item  += '    <span class="input-group-append">'
+            item  += '        <button data-key="'+index+'" class="btn btn-outline-danger remove" type="button">'
+            item  += '            <i class="fa fa-times"></i>'
+            item  += '        </button>'
+            item  += '    </span>'
+            item  += '</div>'
+        return item;
+    }
+
     async function Save() {
         const url = '{{ route('bidan.pasien.action.save') }}'
         const form = new FormData($('#tindakan_form')[0]);
@@ -78,7 +119,8 @@
                     text: 'Perubahan Disimpan'
                 }).then( res => {
                     // window.location.href = "{{ route('pasien.profile.index') }}"
-                });
+                        refreshForm();
+                    });
             } catch (error) {
                 Swal.fire({
                     icon: 'warning',
@@ -86,26 +128,7 @@
                 })
             }
     }
-
-    let index = 0
-    function addMore() {
-        $('.items').append(addItem());
-        index++
-    }
-
-    function addItem() { 
-        let item = ''
-            item  += '<div class="input-group mb-2 row-'+index+'">'
-            item  += '    <input class="form-control py-2" type="text" name="listObat[]">'
-            item  += '    <span class="input-group-append">'
-            item  += '        <button data-key="'+index+'" class="btn btn-outline-danger remove" type="button">'
-            item  += '            <i class="fa fa-times"></i>'
-            item  += '        </button>'
-            item  += '    </span>'
-            item  += '</div>'
-        return item
-     }
-
+    
     $(document).on('click', '.remove', function() {
         const key =$(this).data('key')
         $('.row-'+key).remove();
