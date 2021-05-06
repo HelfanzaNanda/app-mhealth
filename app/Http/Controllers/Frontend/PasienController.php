@@ -22,10 +22,11 @@ class PasienController extends HomeController
 		$user = User::where('id', $userID)
 		->where('lat', '!=', null)
 		->where('lng', '!=', null)->first();
-
+		$promots = PromosiKesehatan::all();
 		$isGeoLocation = $user ? true : false;
 		return view('frontend.pasien.home.index', [
-			'isGeoLocation' => $isGeoLocation
+			'isGeoLocation' => $isGeoLocation,
+			'promots' => $promots
 		]);
 	}
 

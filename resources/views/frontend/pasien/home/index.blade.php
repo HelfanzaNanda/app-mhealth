@@ -79,44 +79,23 @@
         <h4 class="font-weight-bold font-20 mt-4">Untuk ibu ketahui</h4>
 
         <hr>
-        <div class="d-flex">
-            <div class="mr-19 h-94 w-94 d-inline-block">
-                <img src="https://akcdn.detik.net.id/visual/2019/09/18/fef8eda8-9c35-4d7d-ad09-058ba2b8d032_169.jpeg?w=650" class="rounded-4" width="94" height="94">
-            </div>
-            <div class="w-251 d-inline-block">
-                <div class="text-pink d-inline-block">KEHAMILAN</div>
-                <div class="font-weight-500 line-height-23 font-18px d-inline-block">
-                    Kenali tanda - tanda pada kehamilan
+        @foreach ($promots as $promo)
+            <div class="d-flex">
+                <div class="mr-19 h-94 w-94 d-inline-block">
+                    <img src="https://akcdn.detik.net.id/visual/2019/09/18/fef8eda8-9c35-4d7d-ad09-058ba2b8d032_169.jpeg?w=650" class="rounded-4" width="94" height="94">
                 </div>
-                <div class="d-inline-block font-14" style="color: #BBBBBB">11 Jam yang lalu</div>
-            </div>
-        </div>
-        <hr>
-        <div class="d-flex">
-            <div class="mr-19 h-94 w-94 d-inline-block">
-                <img src="https://akcdn.detik.net.id/visual/2019/09/18/fef8eda8-9c35-4d7d-ad09-058ba2b8d032_169.jpeg?w=650" class="rounded-4" width="94" height="94">
-            </div>
-            <div class="w-251 d-inline-block">
-                <div class="text-pink d-inline-block">KEHAMILAN</div>
-                <div class="font-weight-500 line-height-23 font-18px d-inline-block">
-                    Kenali tanda - tanda pada kehamilan
+                <div class="w-251 d-inline-block">
+                    <div class="text-pink d-block">{{ $promo->kategori->kategori }}</div>
+                    <div class="font-weight-500 line-height-23 font-18px d-block">
+                        {{ $promo->title }}
+                    </div>
+                    <div class="d-inline-block font-14" style="color: #BBBBBB">
+                        {{ $promo->date->diffForHumans() }}
+                    </div>
                 </div>
-                <div class="d-inline-block font-14" style="color: #BBBBBB">11 Jam yang lalu</div>
             </div>
-        </div>
-        <hr>
-        <div class="d-flex">
-            <div class="mr-19 h-94 w-94 d-inline-block">
-                <img src="https://akcdn.detik.net.id/visual/2019/09/18/fef8eda8-9c35-4d7d-ad09-058ba2b8d032_169.jpeg?w=650" class="rounded-4" width="94" height="94">
-            </div>
-            <div class="w-251 d-inline-block">
-                <div class="text-pink d-inline-block">KEHAMILAN</div>
-                <div class="font-weight-500 line-height-23 font-18px d-inline-block">
-                    Kenali tanda - tanda pada kehamilan
-                </div>
-                <div class="d-inline-block font-14" style="color: #BBBBBB">11 Jam yang lalu</div>
-            </div>
-        </div>
+            <hr>    
+        @endforeach
     </div>
 @endsection
 

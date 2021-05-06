@@ -60,19 +60,22 @@
     </div>
     @push('scripts')
     <script type="text/javascript">
-        function loadItems(){
-            var key = Math.ceil(Math.random()*1000);
-            axios.post('{{route('pasien.health_education.load_items')}}',{filter:$('#filter').val(),key:key})
-            .then(res=>{
-                if(res.data.status==1){
-                    if(res.data.key==key){
-                        for(i in res.data.result){
-                            // console.log(res.data.result[i]);
-                            $('#cat-'+i).html(res.data.result[i]);
+        async function loadItems(){
+            const key = Math.ceil(Math.random()*1000);
+            const filter = $('#filter').val()
+            try {
+                const response = await axios.post('{{route('pasien.health_education.load_items')}}',{filter:filter,key:key})  
+                if(response.data.status == 1){
+                    if(response.data.key == key){
+                        console.log(response.data.result);
+                        for(i in response.data.result){
+                            $('#cat-'+i).html(response.data.result[i]);
                         }
                     }
                 }
-            })
+            } catch (error) {
+                console.log(error);   
+            }
         }
         $(document).ready(()=>{
           loadItems();  

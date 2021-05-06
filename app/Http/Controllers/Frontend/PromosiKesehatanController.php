@@ -15,8 +15,11 @@ class PromosiKesehatanController extends FrontendController
 	public function index($role=''){
 		return view('frontend.pasien.health_education.index');
 	}
-	public function detail($role=''){
-		return view('frontend.pasien.health_education.detail');
+	public function detail($id){
+		$data = PromosiKesehatan::findOrFail($id);
+		return view('frontend.pasien.health_education.detail', [
+			'data' => $data
+		]);
 	}
 	public function load_items(){
 		$key = request()->input('key');

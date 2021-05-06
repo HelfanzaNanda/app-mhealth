@@ -30,7 +30,7 @@
 
     <div class="container" >
         <div class="card">
-            <div class="card-body">
+            <div class="card-body mb-29">
                 <a href="#" onclick="openFrame('{{ route('pasien.profile.modal.password.change') }}', 'Edit Password')" class="d-flex justify-content-between mb-29">
                     <span class="font-size-16 text-black font-weight-500">Ubah Password</span>
                     <img src="{{ asset('images/icon/next.png') }}" width="15" height="15">
@@ -42,10 +42,6 @@
                 <a href="#" onclick="openFrame('{{ route('pasien.modal.health_history') }}', 'Riwayat Kesehatan')"
                     class="d-flex justify-content-between mb-29">
                     <span class="font-size-16 text-black font-weight-500">Riwayat Kesehatan</span>
-                    <img src="{{ asset('images/icon/next.png') }}" width="15" height="15">
-                </a>
-                <a href="#" class="d-flex justify-content-between mb-29">
-                    <span class="font-size-16 text-black font-weight-500">Tindakan</span>
                     <img src="{{ asset('images/icon/next.png') }}" width="15" height="15">
                 </a>
                 <a href="#" class="d-flex justify-content-between mb-29">
@@ -85,7 +81,7 @@
                 button:{
                     text:'Tambah',
                     onclick:function(){
-                        openFrame('{{route('pasien.modal.history_prev_pregnancy.create')}}','Tambah Riwayat Kehamilan Sebelumnya')
+                        openFrame('{{route('pasien.modal.history_prev_pregnancy.create')}}','Tambah Riwayat')
                     }
                 }
             })
@@ -94,7 +90,7 @@
         function openSocioeconomyHistory(){
             openFrame('{{ route('pasien.modal.socioeconomic_history') }}','Riwayat Sosial Ekonomi',{
                 button:{
-                    text:'Tambah',
+                    text:'Edit',
                     onclick:function(){
                         openFrame('{{route('pasien.modal.socioeconomic_history.edit')}}','Edit Riwayat Sosial Ekonomi')
                     }

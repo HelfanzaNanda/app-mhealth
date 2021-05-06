@@ -9,5 +9,5 @@ use App\Models\User;
 use App\Http\Controllers\FrontendController;
 class HomeController extends FrontendController
 {
-
+    
 }

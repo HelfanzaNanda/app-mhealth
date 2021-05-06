@@ -36,7 +36,7 @@ Route::group(['prefix' => 'pasien', 'as' => 'pasien.'], function () {
     Route::group(['prefix' => 'health_education', 'as' => 'health_education.'], function () {
         Route::get('/', 'Frontend\PromosiKesehatanController@index')->name('index');
         Route::post('/load_items', 'Frontend\PromosiKesehatanController@load_items')->name('load_items');
-        Route::get('/modal/detail', 'Frontend\PromosiKesehatanController@detail')->name('modal.detail');
+        Route::get('/modal/detail/{id}', 'Frontend\PromosiKesehatanController@detail')->name('modal.detail');
     });
 
     Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
