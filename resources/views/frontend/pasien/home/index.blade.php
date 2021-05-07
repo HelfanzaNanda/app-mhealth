@@ -85,7 +85,7 @@
                     <img src="https://akcdn.detik.net.id/visual/2019/09/18/fef8eda8-9c35-4d7d-ad09-058ba2b8d032_169.jpeg?w=650" class="rounded-4" width="94" height="94">
                 </div>
                 <div class="w-251 d-inline-block">
-                    <div class="text-pink d-block">{{ $promo->kategori->kategori }}</div>
+                    <div class="text-pink d-block">{{ $promo->kategori ? $promo->kategori->kategori : '' }}</div>
                     <div class="font-weight-500 line-height-23 font-18px d-block">
                         {{ $promo->title }}
                     </div>
