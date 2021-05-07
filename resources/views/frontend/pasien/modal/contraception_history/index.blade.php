@@ -1,52 +1,20 @@
-@extends('frontend.layouts.app', [
-'display' => 'd-none'
-])
+@extends('frontend.layouts.frame')
 @section('content')
-<div class="bg-grey pt-23 mt-1" style="height: 100vh; overflow: hidden">
-    <div class="container-mhealth ">
-        <form action="" id="rk-form">
-            @csrf
-            <div class="form-group">
-                <label class="font-weight-500">Riwayat kontrasepsi pada kehamilan saat ini</label>
-                <input type="text" name="current_pregnancy" id="current_pregnancy"
-                    class="form-control font-size-16 form-mhealth">
+
+<div class="bg-grey pt-3 pb-60" style="max-height: 100vh; overflow: auto">
+    <div class="container-mhealth">
+        <div class="card box-shadow">
+            <div class="card-body">
+                <div class="form-group">
+                    <label style="color: #bfbfbf">Riwayat kontrasepsi pada kehamilan saat ini</label>
+                    <h6>{{ $data->current_pregnancy ?? '-' }}</h6>
+                </div>
+                <div class="form-group">
+                    <label style="color: #bfbfbf">Riwayat kontrasepsi sebelum kehamilan saat ini</label>
+                    <h6>{{ $data->before_current_pregnancy ?? '-' }}</h6>
+                </div>
             </div>
-            <div class="form-group">
-                <label class="font-weight-500">Riwayat kontrasepsi sebelum kehamilan saat ini</label>
-                <input type="text" name="before_current_pregnancy" id="before_current_pregnancy"
-                    class="form-control font-size-16 form-mhealth">
-            </div>
-            <button class="btn btn-mhealth btn-block btn-pink text-white" onclick="save()">Simpan</button>
-        </form>
+        </div>
     </div>
 </div>
-<script type="text/javascript">
-    async function save() {
-        const url = "{{ route('pasien.contraception_history.save') }}"
-        const form = new FormData($('#rk-form')[0]);
-        try {
-            const response = await axios.post(url, form);
-            if(response.data.status != 1) {
-                Swal.fire({
-                    icon: 'warning',
-                    text: response.data.msg
-                });
-                return;
-            }
-            Swal.fire({
-                icon: 'success',
-                text: 'Perubahan Disimpan'
-            }).then( res => {
-                $('#frame-modal').modal('hide');
-                location.reload();
-                // window.location.href = "{{ route('pasien.profile.index') }}"
-            });
-        } catch (error) {
-            Swal.fire({
-                icon: 'warning',
-                text: error
-            })
-        }
-    }
-</script>
 @endsection

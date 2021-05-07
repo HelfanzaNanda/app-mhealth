@@ -83,8 +83,8 @@
 
     async function save(){
         const form = new FormData($('#form-edit')[0]);
-        const response = await axios.post('{{route('bidan.pasien.modal.lab.examination.store')}}',form)
         try {
+            const response = await axios.post('{{route('bidan.pasien.modal.lab.examination.store')}}',form)    
             if(response.data.status!=1){
                 Swal.fire({ icon:'warning', text:response.data.msg })
                 return

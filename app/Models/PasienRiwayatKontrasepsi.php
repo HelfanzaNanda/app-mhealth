@@ -8,4 +8,5 @@ class PasienRiwayatKontrasepsi extends Model
 {
     protected $table = 'pasien_riwayat_kontrasepsi';
     public $timestamps = false;
+    protected $guarded = [];
 }

@@ -38,7 +38,7 @@
         <div class="card">
             <div class="card-body">
                 <a href="#"
-                    onclick="openFrame('{{ route('bidan.pasien.modal.physic.examination', $user->id) }}', 'Pemeriksaan Fisik')"
+                    onclick="window.top.openFrame('{{ route('bidan.pasien.modal.physic.examination', $user->id) }}', 'Pemeriksaan Fisik')"
                     class="d-flex justify-content-between mb-29">
                     <span class="font-size-16 text-black font-weight-500">Pemeriksaan Fisik</span>
                     <img src="{{ asset('images/icon/next.png') }}" width="15" height="15">

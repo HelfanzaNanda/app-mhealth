@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend\Pasien;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Models\PasienKehamilan;
 use App\Models\PasienRiwayatKehamilan;
 
 class RiwayatKehamilanSebelumnyaController extends HomeController
@@ -31,6 +32,12 @@ class RiwayatKehamilanSebelumnyaController extends HomeController
 		$params['pasienid'] = $userid;
 		unset($params['_token']);
 		PasienRiwayatKehamilan::create($params);
+		return response()->json(['status'=>1]);
+	}
+
+	public function delete($id)
+	{
+		PasienRiwayatKehamilan::destroy($id);
 		return response()->json(['status'=>1]);
 	}
 }

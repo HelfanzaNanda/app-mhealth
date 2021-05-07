@@ -27,12 +27,16 @@
                 <label for="">Conjuctiva</label>
                 <select name="conjuctiva" required class="form-control font-size-16 form-mhealth">
                     <option value="0">Pilih Conjuctiva</option>
-                    <option value="pucat" @if ($physic->conjuctiva == 'pucat')
-                        {{ 'selected' }}
-                        @endif>Pucat</option>
-                    <option value="tidak" @if ($physic->conjuctiva == 'tidak')
-                        {{ 'selected' }}
-                        @endif>Tidak</option>
+                    <option value="pucat" 
+                        @if ($physic)
+                            {{ $physic->conjuctiva == 'pucat' ? 'selected' : '' }}
+                        @endif>
+                        Pucat
+                    </option>
+                    <option value="tidak" 
+                    @if ($physic)
+                        {{ $physic->conjuctiva == 'tidak' ? 'selected' : '' }}
+                    @endif>Tidak</option>
                 </select>
             </div>
 
@@ -40,11 +44,13 @@
                 <label for="">Skelera</label>
                 <select name="skelera" required class="form-control font-size-16 form-mhealth">
                     <option value="0">Pilih Skelera</option>
-                    <option value="kuning" @if ($physic->skelera == 'kuning')
-                        {{ 'selected' }}
+                    <option value="kuning" 
+                        @if ($physic)
+                            {{ $physic->skelera == 'kuning' ?'selected' : '' }}
                         @endif>Kuning</option>
-                    <option value="tidak" @if ($physic->skelera == 'tidak')
-                        {{ 'selected' }}
+                    <option value="tidak" 
+                        @if ($physic)
+                            {{ $physic->skelera == 'tidak' ? 'selected' : '' }}
                         @endif>Tidak</option>
                 </select>
             </div>
@@ -180,8 +186,8 @@
 
     async function save(){
         const form = new FormData($('#form-edit')[0]);
-        const response = await axios.post('{{route('bidan.pasien.modal.physic.examination.store')}}',form)
         try {
+            const response = await axios.post('{{route('bidan.pasien.modal.physic.examination.store')}}',form)    
             if(response.data.status!=1){
                 Swal.fire({ icon:'warning', text:response.data.msg })
                 return

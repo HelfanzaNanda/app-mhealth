@@ -55,6 +55,7 @@ Route::group(['prefix' => 'pasien', 'as' => 'pasien.'], function () {
     Route::get('/modal/history-prev-pregnancy', 'Frontend\Pasien\RiwayatKehamilanSebelumnyaController@index')->name('modal.history_prev_pregnancy');
     Route::get('/modal/history-prev-pregnancy/create', 'Frontend\Pasien\RiwayatKehamilanSebelumnyaController@create')->name('modal.history_prev_pregnancy.create');
     Route::post('/modal/history-prev-pregnancy/create', 'Frontend\Pasien\RiwayatKehamilanSebelumnyaController@store')->name('modal.history_prev_pregnancy.store');
+    Route::delete('/modal/history-prev-pregnancy/delete/{id}', 'Frontend\Pasien\RiwayatKehamilanSebelumnyaController@delete')->name('modal.history_prev_pregnancy.delete');
 
     Route::get('/modal/socioeconomic-history', 'Frontend\Pasien\RiwayatSosialEkonomiController@index')->name('modal.socioeconomic_history');
     Route::get('/modal/socioeconomic-history/edit', 'Frontend\Pasien\RiwayatSosialEkonomiController@edit')->name('modal.socioeconomic_history.edit');
@@ -71,11 +72,17 @@ Route::group(['prefix' => 'pasien', 'as' => 'pasien.'], function () {
 
     Route::get('modal/health_records', 'Frontend\PasienController@health_records')->name('modal.health_records');
     Route::get('modal/pregnancy_test', 'Frontend\PasienController@pregnancy_test')->name('modal.pregnancy_test');
-    Route::get('modal/contraception_history', 'Frontend\PasienController@contraception_history')->name('modal.contraception_history');
+    
     Route::get('modal/health_history', 'Frontend\PasienController@health_history')->name('modal.health_history');
 
+    
+    Route::get('modal/contraception_history', 'Frontend\PasienRiwayatKontrasepsiController@index')->name('modal.contraception_history');
+    Route::get('modal/contraception_history/edit', 'Frontend\PasienRiwayatKontrasepsiController@edit')->name('modal.contraception_history.edit');
     Route::post('contraception_history/save', 'Frontend\PasienRiwayatKontrasepsiController@save')->name('contraception_history.save');
+
     Route::post('health_history/save', 'Frontend\PasienRiwayatKesehatanController@save')->name('health_history.save');
+    
+    
     Route::delete('health_history/delete/{id}', 'Frontend\PasienRiwayatKesehatanController@delete')->name('health_history.delete');
     Route::get('/health_history/data', 'Frontend\PasienRiwayatKesehatanController@getData')->name('health_history.data');
 

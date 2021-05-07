@@ -1,8 +1,8 @@
 @extends('frontend.layouts.app')
 @section('content')
 <div class="profile-card mb-3">
-    <div class="container-mhealth">
-        <div class="col-12 shadow shadow-lg">
+    <div class="container-mhealth" style="overflow-y: auto;  height: 100%;">
+        <div class="col-12 shadow shadow-lg" style="height: 100%;">
             <div class="row justify-content-center">
                 <div class="text-header font-size-18 font-weight-500 text-white">Profil</div>
             </div>
@@ -20,9 +20,13 @@
                 <button type="button" class="btn btn-block btn-profile bg-white text-active-pink font-weight-500" 
                 onclick="openHistoryCurrentPregnancy()">Riwayat Kehamilan Sekarang</button>
                 <button type="button" class="btn btn-block btn-profile bg-white text-active-pink font-weight-500"
-                onclick="openFrame('{{ route('pasien.modal.contraception_history') }}', 'Riwayat Kontrasepsi')">Riwayat
+                onclick="openContraceptionHistory()">Riwayat
                 Kontrasepsi</button>
                 <button type="button" class="btn btn-block btn-profile bg-white text-active-pink font-weight-500" onclick="openHistoryPrevPregnancy()">Riwayat Kehamilan Sebelumnya</button>
+                <button type="button" class="btn btn-block btn-profile bg-white text-active-pink font-weight-500"
+                 onclick="openSocioeconomyHistory()">Riwayat Sosial Ekonomi</button>
+                <button type="button" class="btn btn-block btn-profile bg-white text-active-pink font-weight-500" 
+                onclick="openFrame('{{ route('pasien.modal.health_history') }}', 'Riwayat Kesehatan')">Riwayat Kesehatan</button>
             </div>
         </div>
     </div>
@@ -33,15 +37,6 @@
             <div class="card-body mb-29">
                 <a href="#" onclick="openFrame('{{ route('pasien.profile.modal.password.change') }}', 'Edit Password')" class="d-flex justify-content-between mb-29">
                     <span class="font-size-16 text-black font-weight-500">Ubah Password</span>
-                    <img src="{{ asset('images/icon/next.png') }}" width="15" height="15">
-                </a>
-                <a href="#" onclick="openSocioeconomyHistory()" class="d-flex justify-content-between mb-29">
-                    <span class="font-size-16 text-black font-weight-500">Riwayat Sosial Ekonomi</span>
-                    <img src="{{ asset('images/icon/next.png') }}" width="15" height="15">
-                </a>
-                <a href="#" onclick="openFrame('{{ route('pasien.modal.health_history') }}', 'Riwayat Kesehatan')"
-                    class="d-flex justify-content-between mb-29">
-                    <span class="font-size-16 text-black font-weight-500">Riwayat Kesehatan</span>
                     <img src="{{ asset('images/icon/next.png') }}" width="15" height="15">
                 </a>
                 <a href="#" class="d-flex justify-content-between mb-29">
@@ -93,6 +88,17 @@
                     text:'Edit',
                     onclick:function(){
                         openFrame('{{route('pasien.modal.socioeconomic_history.edit')}}','Edit Riwayat Sosial Ekonomi')
+                    }
+                }
+            })
+        }
+
+        function openContraceptionHistory(){
+            openFrame('{{ route('pasien.modal.contraception_history') }}','Riwayat Kontrasepsi',{
+                button:{
+                    text:'Edit',
+                    onclick:function(){
+                        openFrame('{{route('pasien.modal.contraception_history.edit')}}','Edit Riwayat Kontrasepsi')
                     }
                 }
             })
