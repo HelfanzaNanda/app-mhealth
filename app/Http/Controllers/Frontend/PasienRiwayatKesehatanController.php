@@ -18,16 +18,16 @@ class PasienRiwayatKesehatanController extends Controller
     public function save()
     {
         $userid = $this->jwt_data['uid'];
-        $keluhan = request()->input('keluhan') != "" ? request()->input('keluhan') : "-";
-        $riwayat_penyakit = request()->input('riwayat_penyakit') != "" ? request()->input('riwayat_penyakit') : "-";
-        $riwayat_penyakit_suami = request()->input('riwayat_penyakit_suami') != "" ? request()->input('riwayat_penyakit_suami') : "-";
-        $riwayat_kdrt = request()->input('riwayat_kdrt') != "" ? request()->input('riwayat_kdrt') : "-";
+        $listKeluhan = request()->input('listKeluhan') != "" ? request()->input('listKeluhan') : "-";
+        $listPenyakitAnda = request()->input('listPenyakitAnda') != "" ? request()->input('listPenyakitAnda') : "-";
+        $listPenyakitSuami = request()->input('listPenyakitSuami') != "" ? request()->input('listPenyakitSuami') : "-";
+        $listKDRT = request()->input('listKDRT') != "" ? request()->input('listKDRT') : "-";
         PasienRiwayatKesehatan::insert([
             'pasienid' => $userid,
-            'keluhan' => $keluhan,
-            'riwayat_penyakit' => $riwayat_penyakit,
-            'riwayat_penyakit_suami' => $riwayat_penyakit_suami,
-            'riwayat_kdrt' => $riwayat_kdrt,
+            'keluhan' => (request()->has('listKeluhan')) ? implode(', ', $listKeluhan) : '-',
+            'riwayat_penyakit' => (request()->has('listPenyakitAnda')) ? implode(', ', $listPenyakitAnda) : '-',
+            'riwayat_penyakit_suami' => (request()->has('listPenyakitSuami')) ? implode(', ', $listPenyakitSuami) : '-',
+            'riwayat_kdrt' => (request()->has('listKDRT')) ? implode(', ', $listKDRT) : '-',
         ]);
         return response()->json(['status' => 1]);
     }
