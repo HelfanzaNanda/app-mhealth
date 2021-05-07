@@ -31,11 +31,12 @@
           @include('backoffice.components.datatable-default',[
           'url'=>route('backoffice.promosi-kesehatan.datatables'),
           'columns'=>[
-            'recommended'=>'<th>Rekomendasi</th>',
-            'date'=>'<th>Tanggal</th>',
-            'title'=>'<th>Judul</th>',
-            'body'=>'<th>Isi</th>',
-            '_buttons'=>'<th></th>'
+          'recommended'=>'<th>Rekomendasi</th>',
+          'date'=>'<th>Tanggal</th>',
+          'preview-cover'=>'<th>Cover</th>',
+          'title'=>'<th>Judul</th>',
+          'body'=>'<th>Isi</th>',
+          '_buttons'=>'<th></th>'
           ],
           ])
         </div>

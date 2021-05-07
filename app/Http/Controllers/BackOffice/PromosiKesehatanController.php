@@ -10,9 +10,11 @@ use App\Models\User;
 use App\Http\Controllers\BackOfficeController;
 use App\Models\Kategori;
 use App\Models\PromosiKesehatan;
+use App\Traits\UploadFileTrait;
 
 class PromosiKesehatanController extends BackOfficeController
 {
+	use UploadFileTrait;
 	public function datatables()
 	{
 
@@ -23,6 +25,10 @@ class PromosiKesehatanController extends BackOfficeController
 				$input .= '<input type="checkbox" onchange="recommended(this, ' . $row->id . ')" class="checkbox" ' . ($row->recommended ? 'checked' : '') . ' id="checkbox-' . $row->id . '">';
 				$input .= '</div>';
 				return $input;
+			})
+			->addColumn('preview-cover', function ($row) {
+				$img = '<img src="' .  asset($row->cover) . '" style="width: 100px; height: auto;">';
+				return $img;
 			})
 			->addColumn('_buttons', function ($row) {
 				$editurl = route('backoffice.promosi-kesehatan.edit', $row->id);
@@ -42,6 +48,7 @@ class PromosiKesehatanController extends BackOfficeController
 		PromosiKesehatan::updateOrCreate(['id' => $id], [
 			'date' => now(),
 			'kategori_id' => request()->input('kategori_id'),
+			'cover' => 'uploads/images/' . $this->uploadImage(request()->file('cover')),
 			'title' => request()->input('title'),
 			'body' => request()->input('body')
 		]);

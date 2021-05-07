@@ -49,6 +49,13 @@
                 </div>
               </div>
               <div class="row">
+                <label class="col-12 col-md-3 mt-2">Cover</label>
+                <div class="col-12 col-md-9">
+                  <input type="file" name="cover" required class="form-control" onchange="Preview(event)">
+                  <img style="max-width: 300px; height: auto;" id="previewImage">
+                </div>
+              </div>
+              <div class="row">
                 <label class="col-12 col-md-3 mt-2">Judul</label>
                 <div class="col-12 col-md-9">
                   <input type="text" name="title" class="form-control" placeholder="Judul" value="{{ $data['title'] }}">
@@ -81,6 +88,17 @@
 
 @push('scripts')
 <script type="text/javascript">
+  function Preview(event) 
+  {
+    var reader = new FileReader();
+    reader.onload = function()
+    {
+      var output = document.getElementById('previewImage');
+      output.src = reader.result;
+    }
+    reader.readAsDataURL(event.target.files[0]);
+  }
+
   $(document).ready(function() {
     $('.summernote').summernote({
         height: 100
