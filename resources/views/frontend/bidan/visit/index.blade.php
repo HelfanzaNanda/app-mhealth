@@ -3,13 +3,10 @@
 @section('content')
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <div class="pasien">
-    <div class="container box-shadow bg-white">
-        <div class="shadow shadow-lg">
-            <div class="py-3">
-                <img src="{{ asset('images/icon/back.png') }}" width="18" height="18">
-            </div>
-            <div class="row justify-content-center">
-                <div class="text-header font-size-18 text-active-pink">Kunjungan</div>
+    <div class="container box-shadow" style="height: 60px">
+        <div class="hadow shadow-lg">
+            <div class="justify-content-center">
+                <div class="text-header font-size-18 text-active-pink font-weight-500 text-center">Kunjungan</div>
             </div>
         </div>
     </div>
@@ -36,7 +33,7 @@
                     <select class="form-control font-size-16 form-mhealth select2Input" name="pasienId" id="pasienId">
                         <option value="0"></option>
                         @foreach ($data as $item)
-                        <option value="{{ $item->pasienid }}">{{ $item->user->fullname }}
+                        <option value="{{ $item->pasienid }}">{{ $item->user->fullname }} - {{ $item->user->nik }}
                         </option>
                         @endforeach
                     </select>

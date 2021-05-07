@@ -16,7 +16,7 @@
             <div style="flex-grow: 1;overflow: auto;" >
                 @foreach($kunjungans as $kunjungan)
                     <div class="row align-items-center" 
-                    onclick="openFrame('{{route('bidan.inbox.modal.chat', $kunjungan->id)}}', '{{ $kunjungan->pasien->fullname }}')">
+                    onclick="window.top.openFrame('{{route('bidan.inbox.modal.chat', $kunjungan->id)}}', '{{ $kunjungan->pasien->fullname }}')">
                         <div class="col-2">
                             <img src="{{ asset('images/profile.png') }}" class="image-chat-responsive">
                         </div>
@@ -24,7 +24,9 @@
                             <div class="font-weight-500 font-18px block">
                                 {{$kunjungan->pasien->fullname}}
                             </div>
-                            <div class="d-inline-block text-pink font-14">{{$kunjungan->pasien->nik}}</div>
+                            <div class="d-inline-block text-pink font-14">
+                                {{ $kunjungan->pasien->messages()->orderBy('id', 'desc')->first()->message }}
+                            </div>
                         </div>
                     </div>
                     <hr>

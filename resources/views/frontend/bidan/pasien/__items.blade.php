@@ -1,5 +1,5 @@
 @foreach($items as $item)
-<div class="row align-items-center" onclick="openFrame('{{route('bidan.pasien.modal.profile', $item->ibuhamil->id)}}')">
+<div class="row align-items-center" onclick="openFrame('{{route('bidan.pasien.modal.profile', $item->ibuhamil->id)}}', 'Profile')">
     <div class="col-2">
         <img src="{{ asset('images/profile.png') }}" class="image-chat-responsive">
     </div>

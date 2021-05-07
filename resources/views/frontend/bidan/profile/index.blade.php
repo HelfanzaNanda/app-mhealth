@@ -1,13 +1,10 @@
 @extends('frontend.layouts.app')
 @section('content')
 <div class="pasien">
-    <div class="container box-shadow bg-white">
-        <div class="col-12 shadow shadow-lg">
-            <div class="py-3">
-                <img src="{{ asset('images/icon/back.png') }}" width="18" height="18">
-            </div>
-            <div class="row justify-content-center">
-                <div class="text-header font-size-18 text-active-pink">Profil</div>
+    <div class="container box-shadow" style="height: 60px">
+        <div class="hadow shadow-lg">
+            <div class="justify-content-center">
+                <div class="text-header font-size-18 text-active-pink font-weight-500 text-center">Profile</div>
             </div>
         </div>
     </div>

@@ -1,7 +1,7 @@
 @extends('frontend.layouts.app')
 @section('content')
 <div class="pasien">
-    <div class="container box-shadow bg-white">
+    {{-- <div class="container box-shadow bg-white">
         <div class="shadow shadow-lg">
             <div class="py-3">
                 <img src="{{ asset('images/icon/back.png') }}" width="18" height="18">
@@ -10,7 +10,7 @@
                 <div class="text-header font-size-18 text-active-pink font-weight-500">Tindakan</div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="bg-grey pt-23" style="height: 86vh; overflow: auto">
         <div class="container-mhealth h-100">
             <form action="" id="tindakan_form">

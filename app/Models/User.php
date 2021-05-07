@@ -37,4 +37,10 @@ class User extends Model
     public function getAgeAttribute() {
         return Carbon::parse($this->attributes['tanggallahir'])->age;
     }
+
+    public function messages()
+    {
+        return $this->hasMany(Inbox::class, 'pasienid', 'id')
+        ->where('pengirim', $this->id);
+    }
 }

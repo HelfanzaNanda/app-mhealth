@@ -4,9 +4,9 @@
     <div class="profile-card mb-3">
         <div class="container-mhealth">
             <div class="col-12 shadow shadow-lg">
-                <div class="row justify-content-center">
+                {{-- <div class="row justify-content-center">
                     <div class="text-header font-size-18 font-weight-500 text-white">Profil</div>
-                </div>
+                </div> --}}
             </div>
             <div class="row mt-62 mb-20">
                 <div class="thumb-lg mx-auto">
@@ -44,18 +44,14 @@
                     <img src="{{ asset('images/icon/next.png') }}" width="15" height="15">
                 </a>
                 <a href="#"
-                    onclick="openFrame('{{ route('bidan.pasien.modal.lab.examination', $user->id) }}', 'Pemeriksaan Lab')"
+                    onclick="openlabExamination()"
                     class="d-flex justify-content-between mb-29">
                     <span class="font-size-16 text-black font-weight-500">Pemeriksaan Lab</span>
                     <img src="{{ asset('images/icon/next.png') }}" width="15" height="15">
                 </a>
                 <a href="#" class="d-flex justify-content-between mb-29"
-                    onclick="openFrame('{{route('bidan.pasien.modal.action', $user->id)}}', 'Tindakan')">
+                    onclick="openAction()">
                     <span class="font-size-16 text-black font-weight-500">Tindakan</span>
-                    <img src="{{ asset('images/icon/next.png') }}" width="15" height="15">
-                </a>
-                <a href="#" class="d-flex justify-content-between">
-                    <span class="font-size-16 text-black font-weight-500">Rujukan</span>
                     <img src="{{ asset('images/icon/next.png') }}" width="15" height="15">
                 </a>
             </div>
@@ -66,5 +62,13 @@
 @endsection
 
 @push('scripts')
+    <script>
+        function openlabExamination(){
+            window.top.openFrame('{{ route('bidan.pasien.modal.lab.examination', $user->id) }}', 'Pemeriksaan Lab')
+        }
 
+        function openAction() {  
+            window.top.openFrame('{{route('bidan.pasien.modal.action', $user->id)}}', 'Tindakan')
+        }
+    </script>
 @endpush
