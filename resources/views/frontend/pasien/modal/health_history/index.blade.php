@@ -63,9 +63,26 @@
             <button class="btn btn-mhealth btn-block btn-pink text-white" type="button" onclick="save()">Simpan</button>
         </form>
 
-        <div class="my-4">
+        <div class="py-4">
             <div class="mb-2">
                 Riwayat Kesehatan:
+                {{-- loop --}}
+                <div class="card box-shadow mb-2 card-0">
+                    <div class="card-body">
+                        <div class="row align-items-end ">
+                            <div class="col-10">
+                                <p>Date : </p>
+                                <p>Penolong : </p>
+                                <p>Tempat : </p>
+                                <p>Persalinan : </p>
+                            </div>
+                            <div class="col-1">
+                                <button data-key="0" data-id="0" class="btn btn-danger btn-remove-item btn-sm"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- end loop --}}
             </div>
             <div id="dataList">
             </div>
