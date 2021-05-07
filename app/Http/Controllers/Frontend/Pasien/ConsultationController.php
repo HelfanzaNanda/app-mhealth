@@ -20,9 +20,12 @@ class ConsultationController extends HomeController
             $message = Inbox::where('pasienid', $userID)->where('bidanid', $kunjungan->bidanid)
             ->where('pengirim', '!=', $userID)
             ->orderBy('id', 'desc')->first();
-            $message->update([
-                'status' => 'read'
-            ]);
+            if ($message) {
+                $message->update([
+                    'status' => 'read'
+                ]);
+            }
+            
         }else{
             $status = false;
             $messages = 'all';
