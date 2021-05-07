@@ -67,6 +67,8 @@
             <div class="mb-2">
                 Riwayat Kesehatan:
             </div>
+            <div id="dataList">
+            </div>
         </div>
     </div>
 </div>
