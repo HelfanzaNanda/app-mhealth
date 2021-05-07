@@ -20,8 +20,8 @@ class PasienController extends HomeController
 	{
 		$userID = $this->jwt_data['uid'];
 		$user = User::where('id', $userID)
-		->where('lat', '!=', null)
-		->where('lng', '!=', null)->first();
+			->where('lat', '!=', null)
+			->where('lng', '!=', null)->first();
 		$promots = PromosiKesehatan::all();
 		$isGeoLocation = $user ? true : false;
 		return view('frontend.pasien.home.index', [
@@ -36,7 +36,7 @@ class PasienController extends HomeController
 		//unset($request->_token);
 		$userID = $this->jwt_data['uid'];
 		User::where('id', $userID)->update($request->all());
-		return response()->json(['status'=>1]);
+		return response()->json(['status' => 1]);
 	}
 
 
@@ -58,7 +58,7 @@ class PasienController extends HomeController
 	{
 		return view('frontend.pasien.modal.health_records.index');
 	}
-	
+
 	public function pregnancy_test()
 	{
 		return view('frontend.pasien.modal.pregnancy_test.index');
@@ -72,7 +72,7 @@ class PasienController extends HomeController
 	public function health_history()
 	{
 		$userID = $this->jwt_data['uid'];
-		$data = PasienRiwayatKesehatan::where('pasienid', $userID)->get();
+		$data = PasienRiwayatKesehatan::where('pasienid', $userID)->orderBy('id', 'DESC')->get();
 		return view('frontend.pasien.modal.health_history.index', ['data' => $data]);
 	}
 }

@@ -64,27 +64,42 @@
         </form>
 
         <div class="py-4">
-            <div class="mb-2">
-                Riwayat Kesehatan:
+            <p>Riwayat Kesehatan:</p>
+            <div class="mb-2" id="dataList">
                 {{-- loop --}}
+                @foreach ($data as $item)
                 <div class="card box-shadow mb-2 card-0">
                     <div class="card-body">
                         <div class="row align-items-end ">
                             <div class="col-10">
-                                <p>Date : </p>
-                                <p>Penolong : </p>
-                                <p>Tempat : </p>
-                                <p>Persalinan : </p>
+                                <div class="my-2">
+                                    <p>Keluhan : </p>
+                                    <p>{{ $item->keluhan }}</p>
+                                </div>
+                                <div class="my-2">
+                                    <p>Riwayat Penyakit Anda : </p>
+                                    <p>{{ $item->riwayat_penyakit }}</p>
+                                </div>
+                                <div class="my-2">
+                                    <p>Riwayat Penyakit Suami : </p>
+                                    <p>{{ $item->riwayat_penyakit_suami }}</p>
+                                </div>
+                                <div class="my-2">
+                                    <p>Riwayat KDRT : </p>
+                                    <p>{{ $item->riwayat_kdrt }}</p>
+                                </div>
                             </div>
                             <div class="col-1">
-                                <button data-key="0" data-id="0" class="btn btn-danger btn-remove-item btn-sm"><i class="fas fa-trash"></i></button>
+                                <button class="btn btn-danger btn-remove-item btn-sm" type="button"
+                                    onclick="Delete({{ $item->id }})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
+                @endforeach
                 {{-- end loop --}}
-            </div>
-            <div id="dataList">
             </div>
         </div>
     </div>
@@ -98,7 +113,54 @@
     let indexPenyakitAnda = 0;
     let indexPenyakitSuami = 0;
     let indexKDRT = 0;
+
+    function refreshForm() {
+        $('.inputList').remove();
+        indexKeluhan = 0;
+        indexPenyakitAnda = 0;
+        indexPenyakitSuami = 0;
+        indexKDRT = 0;
+    }
     
+    async function loadCards() {
+        $('#dataList').html('');
+        let data = await this.getData();
+        data.forEach(element => {
+            let dataList = ``;
+            dataList += `<div class="card box-shadow mb-2 card-0">
+                    <div class="card-body">
+                        <div class="row align-items-end ">
+                            <div class="col-10">
+                                <div class="my-2">
+                                    <p>Keluhan : </p>
+                                    <p>${element.keluhan}</p>
+                                </div>
+                                <div class="my-2">
+                                    <p>Riwayat Penyakit Anda : </p>
+                                    <p>${element.riwayat_penyakit}</p>
+                                </div>
+                                <div class="my-2">
+                                    <p>Riwayat Penyakit Suami : </p>
+                                    <p>${element.riwayat_penyakit_suami}</p>
+                                </div>
+                                <div class="my-2">
+                                    <p>Riwayat KDRT : </p>
+                                    <p>${element.riwayat_kdrt}</p>
+                                </div>
+                            </div>
+                            <div class="col-1">
+                                <button class="btn btn-danger btn-remove-item btn-sm" type="button"
+                                    onclick="Delete(${element.id})">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+                $('#dataList').html(dataList);
+        });
+    }
+
     $(document).on('click', '.removeKeluhan', function() {
         const key =$(this).data('key')
         $('.row-'+key+'-removeKeluhan').remove();
@@ -173,7 +235,7 @@
  
     function addListItem(inputName, listValue, index, classRow) {
         let item = ''
-            item  += '<div class="input-group my-1 row-'+index+'-'+classRow+'">'
+            item  += '<div class="input-group inputList my-1 row-'+index+'-'+classRow+'">'
             item  += '    <input class="form-control py-2" type="text" readonly name="'+inputName+'" value="'+listValue+'">'
             item  += '    <span class="input-group-append">'
             item  += '        <button data-key="'+index+'" class="btn btn-outline-danger '+classRow+'" type="button">'
@@ -183,32 +245,6 @@
             item  += '</div>'
         return item;
     }
-
-    // loadList();
-    // function loadList() {
-    //     $.ajax({
-    //         type  : 'GET',
-    //         url   : "{{ route('pasien.health_history.data') }}",
-    //         async : true,
-    //         dataType : 'json',
-    //         success : function(data){
-    //             var html = ``;
-    //             data.forEach(element => {
-    //                 html += `<div class="input-group my-2">
-    //                             <input class="form-control py-2" type="text" readonly
-    //                                 value="${element.keluhan}, aaa, ${element.riwayat_penyakit}, ${element.riwayat_penyakit_suami}, ${element.riwayat_kdrt}">
-    //                             <span class="input-group-append">
-    //                                 <button class="btn btn-outline-danger" onclick="Delete(${element.id})">
-    //                                     <i class="fa fa-times"></i>
-    //                                 </button>
-    //                             </span>
-    //                         </div>`;
-    //             });
-    //             // console.log(data);
-    //             $('#dataList').html(html);
-    //         }
-    //     });
-    // }
 
     async function getData() {
         const url = "{{ route('pasien.health_history.data') }}";
@@ -231,10 +267,7 @@
                 icon: 'success',
                 text: 'Perubahan Disimpan'
             }).then( res => {
-                loadList();
-                // $('#frame-modal').modal('hide');
-                // location.reload();
-                // window.location.href = "{{ route('pasien.profile.index') }}"
+                this.loadCards();
             });
         } catch (error) {
             Swal.fire({
@@ -260,10 +293,8 @@
                 icon: 'success',
                 text: 'Perubahan Disimpan'
             }).then( res => {
-                // loadList();
-                // $('#frame-modal').modal('hide');
-                // location.reload();
-                // window.location.href = "{{ route('pasien.profile.index') }}"
+                this.refreshForm();
+                this.loadCards();
             });
         } catch (error) {
             Swal.fire({
