@@ -44,11 +44,11 @@ class PromosiKesehatanController extends BackOfficeController
 	public function save()
 	{
 		$id = request()->input('id');
-
+		$promosiKesehatan = PromosiKesehatan::where('id', $id)->first();
 		PromosiKesehatan::updateOrCreate(['id' => $id], [
 			'date' => now(),
 			'kategori_id' => request()->input('kategori_id'),
-			'cover' => 'uploads/images/' . $this->uploadImage(request()->file('cover')),
+			'cover' => (request()->file('cover') != '') ? 'uploads/images/' . $this->uploadImage(request()->file('cover')) : $promosiKesehatan->cover,
 			'title' => request()->input('title'),
 			'body' => request()->input('body')
 		]);
@@ -79,6 +79,7 @@ class PromosiKesehatanController extends BackOfficeController
 			'data' => [
 				'kategori_id' => '',
 				'id' => '',
+				'cover' => '',
 				'title' => '',
 				'body' => '',
 			]

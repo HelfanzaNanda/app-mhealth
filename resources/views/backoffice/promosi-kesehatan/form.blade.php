@@ -48,6 +48,14 @@
                   </select>
                 </div>
               </div>
+              @if ($data['cover'] != '')
+              <div class="row">
+                <label class="col-12 col-md-3 mt-2">Cover Sekarang</label>
+                <div class="col-12 col-md-9">
+                  <img src="{{ asset($data['cover']) }}" style="max-width: 300px; height: auto;">
+                </div>
+              </div>
+              @endif
               <div class="row">
                 <label class="col-12 col-md-3 mt-2">Cover</label>
                 <div class="col-12 col-md-9">
@@ -75,8 +83,8 @@
         <div class="card">
           <div class="card-body">
             <div class="text-center">
-              <button class="btn btn-outline-success" onclick="save(true)">Save & Back</button>
-              <button class="btn btn-success" onclick="save()">Save</button>
+              <button class="btn btn-outline-success" type="button" onclick="save(true)">Save & Back</button>
+              <button class="btn btn-success" type="button" onclick="save()">Save</button>
             </div>
           </div>
         </div>
