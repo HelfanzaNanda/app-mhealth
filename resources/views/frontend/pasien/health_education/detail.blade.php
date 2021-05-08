@@ -1,6 +1,6 @@
-@extends('frontend.layouts.app')
+@extends('frontend.layouts.frame')
 @section('content')
-<div class="card card-image" style="position: relative; background-image: url({{ asset('images/women.jpg') }})">
+<div class="card card-image" style="position: relative; background-image: url({{ asset($data->cover) }})">
     <div class="text-white text-center rgba-stylish-strong py-5 px-4">
       <div class="py-5">
         <span class="bg-light-pink span-category">{{ $data->kategori->kategori }}</span>

@@ -82,7 +82,8 @@
         @foreach ($promots as $promo)
             <div class="d-flex">
                 <div class="mr-19 h-94 w-94 d-inline-block">
-                    <img src="https://akcdn.detik.net.id/visual/2019/09/18/fef8eda8-9c35-4d7d-ad09-058ba2b8d032_169.jpeg?w=650" class="rounded-4" width="94" height="94">
+                    {{-- <img src="https://akcdn.detik.net.id/visual/2019/09/18/fef8eda8-9c35-4d7d-ad09-058ba2b8d032_169.jpeg?w=650" class="rounded-4" width="94" height="94"> --}}
+                    <img src="{{ $promo->cover }}" class="rounded-4" width="94" height="94" style="object-fit: cover; object-position: center">
                 </div>
                 <div class="w-251 d-inline-block">
                     <div class="text-pink d-block">{{ $promo->kategori ? $promo->kategori->kategori : '' }}</div>

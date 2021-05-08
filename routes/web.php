@@ -118,6 +118,11 @@ Route::group(['prefix' => 'bidan', 'as' => 'bidan.'], function () {
         Route::get('/modal/physic-examination/{pasien_id}', 'Frontend\Bidan\PhysicalExaminationController@index')->name('modal.physic.examination');
         Route::post('/modal/physic-examination', 'Frontend\Bidan\PhysicalExaminationController@store')->name('modal.physic.examination.store');
 
+        Route::get('/modal/identity/{pasien_id}', 'Frontend\Bidan\PasienController@identity')->name('modal.identity');
+        Route::get('/modal/contraception-history/{pasien_id}', 'Frontend\Bidan\PasienController@contraception_history')->name('modal.contraception-history');
+        Route::get('/modal/history-current-pregnancy/{pasien_id}', 'Frontend\Bidan\PasienController@history_current_pregnancy')->name('modal.history.current.pregnancy');
+        Route::get('/modal/history-prev-pregnancy/{pasien_id}', 'Frontend\Bidan\PasienController@history_prev_pregnancy')->name('modal.history.prev.pregnancy');
+
         Route::post('/save', 'Frontend\BidanPasienController@save')->name('save');
         Route::post('action/save', 'Frontend\BidanTindakanController@save')->name('action.save');
     });

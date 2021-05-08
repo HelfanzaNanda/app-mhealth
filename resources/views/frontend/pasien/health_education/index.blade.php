@@ -16,70 +16,78 @@
                         <img src="{{ asset('images/icon/search.png') }}" width="22" height="22">
                     </span>
                     <input type="text" class="form-control 
-                     pl-5 font-18px form-mhealth" id="filter"
+                     pl-5 font-18px form-mhealth" id="search"
                     placeholder="Cari Artikel" oninput="loadItems()">
                 </div>
             </div>
           
             <ul class="nav justify-content-start flex-nowrap " style="overflow-x: auto;">
                 <li class="nav-item">
-                    <a class="nav-link text-nowrap text-light-pink active" data-toggle="tab" href="#cat-all">Semua</a>
+                    <a class="nav-link text-nowrap text-light-pink active" 
+                    onclick="loadItems()"
+                    >Semua</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-nowrap text-light-pink" data-toggle="tab" href="#cat-recommended">Rekomendasi</a>
+                    <a class="nav-link text-nowrap text-light-pink" 
+                    onclick="loadItems(true)" >Recommended</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-nowrap text-light-pink" data-toggle="tab" href="#cat-pregnant">Kehamilan</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-nowrap text-light-pink" data-toggle="tab" href="#cat-test">Test</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-nowrap text-light-pink" data-toggle="tab" href="#cat-health">kesehatan</a>
-                </li>
+                @foreach ($categories as $category)
+                    <li class="nav-item">
+                        <a class="nav-link text-nowrap text-light-pink" 
+                        onclick="loadItems(false, '{{ $category->id }}')" >{{ $category->kategori }}</a>
+                    </li>
+                @endforeach
             </ul>
             <hr>
-            <div class="tab-content">
-                <div class="tab-pane active" id="cat-all" >
-                    
-                </div>
-                <div class="tab-pane fade" id="cat-recommended" >
-                    
-                </div>
-                <div class="tab-pane fade" id="cat-pregnant" >
-                    
-                </div>
-                <div class="tab-pane fade" id="cat-test" >
-                    
-                </div>
-                <div class="tab-pane fade" id="cat-health" >
-
-                </div>
-            </div>
+            <div id="content"></div>
         </div>
     </div>
-    @push('scripts')
-    <script type="text/javascript">
-        async function loadItems(){
-            const key = Math.ceil(Math.random()*1000);
-            const filter = $('#filter').val()
-            try {
-                const response = await axios.post('{{route('pasien.health_education.load_items')}}',{filter:filter,key:key})  
-                if(response.data.status == 1){
-                    if(response.data.key == key){
-                        console.log(response.data.result);
-                        for(i in response.data.result){
-                            $('#cat-'+i).html(response.data.result[i]);
-                        }
-                    }
-                }
-            } catch (error) {
-                console.log(error);   
-            }
-        }
-        $(document).ready(()=>{
-          loadItems();  
-        })
-    </script>
-    @endpush
 @endsection
+
+@push('scripts')
+<script type="text/javascript">
+
+    $(document).ready(function () {  
+        loadItems()
+    })
+
+    async function loadItems(recommended = false, category = null) {  
+        const search = $('#search').val()
+        try {
+            const response = await axios.post('{{route('pasien.health_education.load_items')}}',{
+                search:search,
+                recommended:recommended,
+                category:category
+            })
+            if (response.status == 200) {
+                $('#content').html(showItems(response.data))
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+    function showItems(items) {
+        let layout = ''
+        $.each(items, function(index, item){
+            layout += '<div class="d-flex" onclick="gotoDetail('+item.id+')">'
+            layout += '    <div class="mr-19 h-94 w-94 d-inline-block">'
+            layout += '        <img src=" {{ URL::asset('') }}'+item.cover+'" class="rounded-4" width="94" height="94" style="object-fit: cover; object-position: center">'
+            layout += '    </div>'
+            layout += '    <div class="w-251 ">'
+            layout += '        <div class="text-pink "></div>'
+            layout += '        <div class="font-weight-500 line-height-23 font-18px "> '+item.title+' </div>'
+            layout += '        <div class=" font-14" style="color: #BBBBBB">'+new Date(item.date).toISOString().split('T')[0]+'</div>'
+            layout += '    </div>'
+            layout += '</div>'
+            layout += '<hr>'
+        });
+        return layout
+    }
+
+    function gotoDetail(id){
+        openFrame('{{ route("pasien.health_education.modal.detail", "") }}/'+id+'','',{fullscreen:true,light:true})
+    }
+</script>
+@endpush

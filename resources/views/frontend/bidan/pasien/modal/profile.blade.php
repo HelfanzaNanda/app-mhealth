@@ -1,4 +1,4 @@
-@extends('frontend.layouts.app')
+@extends('frontend.layouts.frame')
 @section('content')
 <div class="pb-4" style="max-height: 93vh; overflow: auto">
     <div class="profile-card mb-3">
@@ -19,15 +19,19 @@
             </div>
             <div class="text-center">
                 <button type="button"
+                onclick="window.top.openFrame('{{ route('bidan.pasien.modal.identity', $user->id) }}', 'Identitas')"
                     class="btn btn-block btn-profile bg-white text-active-pink font-weight-500">Identitas
                     Pasien</button>
                 <button type="button"
+                onclick="window.top.openFrame('{{ route('bidan.pasien.modal.history.current.pregnancy', $user->id) }}', 'Riwayat Kehamilan Sekarang')"
                     class="btn btn-block btn-profile bg-white text-active-pink font-weight-500">Riwayat Kehamilan
                     Sekarang</button>
                 <button type="button"
+                onclick="window.top.openFrame('{{ route('bidan.pasien.modal.contraception-history', $user->id) }}', 'Riwayat Kontrasepsi')"
                     class="btn btn-block btn-profile bg-white text-active-pink font-weight-500">Riwayat
                     Kontrasepsi</button>
                 <button type="button"
+                onclick="window.top.openFrame('{{ route('bidan.pasien.modal.history.prev.pregnancy', $user->id) }}', 'Riwayat Kehamilan Sebelumnya')"
                     class="btn btn-block btn-profile bg-white text-active-pink font-weight-500">Riwayat Kehamilan
                     Sebelumnya</button>
             </div>

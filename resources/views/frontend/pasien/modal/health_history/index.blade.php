@@ -66,7 +66,6 @@
         <div class="py-4">
             <p>Riwayat Kesehatan:</p>
             <div class="mb-2" id="dataList">
-                {{-- loop --}}
                 @foreach ($data as $item)
                 <div class="card box-shadow mb-2 card-0">
                     <div class="card-body">
@@ -99,7 +98,6 @@
                     </div>
                 </div>
                 @endforeach
-                {{-- end loop --}}
             </div>
         </div>
     </div>

@@ -4,7 +4,7 @@
     <div class="container-mhealth" style="overflow-y: auto;  height: 100%;">
         <div class="col-12 shadow shadow-lg" style="height: 100%;">
             <div class="row justify-content-center">
-                <div class="text-header font-size-18 font-weight-500 text-white">Profil</div>
+                <div class="text-header font-size-18 font-weight-500 text-center text-white">Profil</div>
             </div>
             <div class="row mt-62 mb-20">
                 <div class="thumb-lg mx-auto">
