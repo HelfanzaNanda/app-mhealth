@@ -33,7 +33,7 @@
                     <select class="form-control font-size-16 form-mhealth select2Input" name="pasienId" id="pasienId">
                         <option value="0"></option>
                         @foreach ($data as $item)
-                        <option value="{{ $item->pasienid }}">{{ $item->user->fullname }} - {{ $item->user->nik }}
+                        <option value="{{ $item->pasienid }}">{{ $item->pasien->fullname }} - {{ $item->pasien->nik }}
                         </option>
                         @endforeach
                     </select>

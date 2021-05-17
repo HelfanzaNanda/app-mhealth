@@ -16,4 +16,9 @@ class BidanPasien extends Model
     {
         return $this->belongsTo(User::class, 'pasienid','id');
     }
+
+	public function pasien()
+	{
+		return $this->belongsTo(User::class, 'pasienid');
+	}
 }

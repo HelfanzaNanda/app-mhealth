@@ -22,15 +22,9 @@ class PhysicalExaminationController extends Controller
     {
         //return json_encode($request->all());
         $params = $request->all();
-        $id = $request->id;
         unset($params['_token']);
-        unset($params['id']);
-        if ($id) {
-            PemeriksaanFisik::where('id', $id)->update($params);
-        } else {
-            $params['bidanid'] = $this->jwt_data['uid'];
-            PemeriksaanFisik::create($params);
-        }
+		$params['bidanid'] = $this->jwt_data['uid'];
+        PemeriksaanFisik::create($params);
         return response()->json(['status' => 1]);
     }
 }

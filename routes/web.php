@@ -50,7 +50,7 @@ Route::group(['prefix' => 'pasien', 'as' => 'pasien.'], function () {
 
     Route::get('/modal/history-current-pregnancy', 'Frontend\Pasien\RiwayatKehamilanSaatIniController@index')->name('modal.history_current_pregnancy');
     Route::get('/modal/history-current-pregnancy/edit', 'Frontend\Pasien\RiwayatKehamilanSaatIniController@edit')->name('modal.history_current_pregnancy.edit');
-    Route::post('/modal/history-current-pregnancy/{id}', 'Frontend\Pasien\RiwayatKehamilanSaatIniController@update')->name('modal.history_current_pregnancy.change');
+    Route::post('/modal/history-current-pregnancy/{id?}', 'Frontend\Pasien\RiwayatKehamilanSaatIniController@update')->name('modal.history_current_pregnancy.change');
 
     Route::get('/modal/history-prev-pregnancy', 'Frontend\Pasien\RiwayatKehamilanSebelumnyaController@index')->name('modal.history_prev_pregnancy');
     Route::get('/modal/history-prev-pregnancy/create', 'Frontend\Pasien\RiwayatKehamilanSebelumnyaController@create')->name('modal.history_prev_pregnancy.create');

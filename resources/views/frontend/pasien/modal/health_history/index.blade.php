@@ -2,7 +2,7 @@
 'display' => 'd-none'
 ])
 @section('content')
-<div class="bg-grey pt-23 mt-1 overflow-y-auto" style="height: 100vh; overflow: hidden">
+<div class="bg-grey pt-23 mt-1" style="height: 100vh; overflow-y: auto">
     <div class="container-mhealth ">
         <form action="" id="rp-form">
             @csrf
@@ -71,20 +71,20 @@
                     <div class="card-body">
                         <div class="row align-items-end ">
                             <div class="col-10">
-                                <div class="my-2">
-                                    <p>Keluhan : </p>
+                                <div>
+                                    <small>Keluhan : </small>
                                     <p>{{ $item->keluhan }}</p>
                                 </div>
-                                <div class="my-2">
-                                    <p>Riwayat Penyakit Anda : </p>
+                                <div>
+                                    <small>Riwayat Penyakit Anda : </small>
                                     <p>{{ $item->riwayat_penyakit }}</p>
                                 </div>
-                                <div class="my-2">
-                                    <p>Riwayat Penyakit Suami : </p>
+                                <div>
+                                    <small>Riwayat Penyakit Suami : </small>
                                     <p>{{ $item->riwayat_penyakit_suami }}</p>
                                 </div>
-                                <div class="my-2">
-                                    <p>Riwayat KDRT : </p>
+                                <div>
+                                    <small>Riwayat KDRT : </small>
                                     <p>{{ $item->riwayat_kdrt }}</p>
                                 </div>
                             </div>

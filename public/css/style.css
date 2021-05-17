@@ -612,7 +612,8 @@
   .profile-card{
     overflow: hidden;
     /* position: relative; */
-    height: 540px;
+    /* height: 540px; */
+	height: 588px;
     background: #F25287;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -727,4 +728,14 @@
 
 .modal-dialog{
     margin: 0;
+}
+
+@media only screen and (max-width: 376px) {
+	.xs-w-150{
+		width: 150px;
+	}
+	.box-summary{
+		width: 150px;
+    	height: 137px;
+	}
 }

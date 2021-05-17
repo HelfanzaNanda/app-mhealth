@@ -12,7 +12,7 @@ class RiwayatSosialEkonomiController extends HomeController
     public function index()
 	{
 		$userid = $this->jwt_data['uid'];
-		$data = PasienRiwayatSosial::where('pasienid', $userid)->firstOrFail();
+		$data = PasienRiwayatSosial::where('pasienid', $userid)->first();
 		return view('frontend.pasien.modal.socioeconomic_history.index', [
 			'data' => $data
 		]);

@@ -1,4 +1,4 @@
-@extends('frontend.layouts.app')
+@extends('frontend.layouts.frame')
 @section('content')
 
     <div class="pt-23" style="max-height: 86vh; overflow: auto">

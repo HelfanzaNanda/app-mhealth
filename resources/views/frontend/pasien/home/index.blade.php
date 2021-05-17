@@ -11,7 +11,7 @@
                     </div>
                 </div>
                 <div class="mr-15">
-                    <img  onclick="openFrame('{{route('pasien.modal.notifikasi')}}','Notifikasi')"
+                    <img  onclick="window.top.openFrame('{{route('pasien.modal.notifikasi')}}','Notifikasi')"
                     src="{{ asset('images/icon/notification.png') }}" width="25" height="25">
                     {{-- <i class="fas fa-bell fa-lg text-white"></i> --}}
                 </div>
@@ -80,7 +80,8 @@
 
         <hr>
         @foreach ($promots as $promo)
-            <div class="d-flex">
+            <div class="d-flex"
+			onclick="openFrame('{{ route('pasien.health_education.modal.detail', $promo->id) }}', '{{ $promo->title }}')">
                 <div class="mr-19 h-94 w-94 d-inline-block">
                     {{-- <img src="https://akcdn.detik.net.id/visual/2019/09/18/fef8eda8-9c35-4d7d-ad09-058ba2b8d032_169.jpeg?w=650" class="rounded-4" width="94" height="94"> --}}
                     <img src="{{ $promo->cover }}" class="rounded-4" width="94" height="94" style="object-fit: cover; object-position: center">
@@ -103,23 +104,32 @@
 @push('scripts')
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
     <script>
-        const isGeoLocation = "{{ $isGeoLocation }}"
-        let messageConfirmation = 'Untuk memberikan layanan yang lebih untuk ibu hamil, '
-            messageConfirmation += 'izinkan Aplikasi mHealth untuk mengkakses Lokasi Kamu'
-        if (!isGeoLocation) {
-            Swal.fire({
-                text: messageConfirmation,
-                showCancelButton: true,
-                confirmButtonText: `OK`,
-                cancelButtonText: `Nanti Aja`,
-            }).then((result) => {
-                if (result) {
-                    getLatLng()
-                }
-            })
-        }
+		$(document).ready(async function () {  
+			const isGeoLocation = "{{ $isGeoLocation }}"
+			let messageConfirmation = 'Untuk memberikan layanan yang lebih untuk ibu hamil, '
+				messageConfirmation += 'izinkan Aplikasi mHealth untuk mengkakses Lokasi Kamu'
+			if (!isGeoLocation) {
+				const permission = await checkPermissions()
+				if (permission === 'granted') {
+					getLatLng()
+				}else{
+					Swal.fire({
+						text: messageConfirmation,
+						showCancelButton: true,
+						confirmButtonText: `OK`,
+						cancelButtonText: `Nanti Aja`,
+					}).then(result => {
+						if (result) { getLatLng() }
+					})
+				}
+			}
+		})
 
-        function getLatLng() { 
+		function checkPermissions() {
+			return navigator.permissions.query({name:'geolocation'}).then(result => result.state);
+		}
+
+        function getLatLng() {
             mapboxgl.accessToken = "{{ env('MAPBOX_ACCESS_TOKEN') }}"    
             if ("geolocation" in navigator) { 
                 navigator.geolocation.getCurrentPosition(position => { 

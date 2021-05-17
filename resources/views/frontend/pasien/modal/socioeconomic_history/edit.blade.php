@@ -117,15 +117,12 @@
             const form = new FormData($('#form-edit')[0]);
             try {
                 const response = await axios.post(url,form)
-                console.log(response);
                 if (response.data.status != 1) {
                     Swal.fire({ icon:'warning', text:res.data.msg })
                     return
                 }
                 Swal.fire({ icon:'success', text:'Perubahan disimpan' })
-                .then( res =>{ 
-                    window.top.backButton()
-                })
+                .then( res => window.top.backButton())
                 
             } catch (error) {
                 Swal.fire({ icon:'warning', text:error })

@@ -10,4 +10,6 @@ class PasienRiwayatKehamilan extends Model
     public $timestamps = false;
     protected $guarded = [];
 
+	public $dates = ['tanggal'];
+
 }

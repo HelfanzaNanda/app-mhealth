@@ -21,17 +21,10 @@ class LabExaminationController extends HomeController
 
     public function store(Request $request)
     {
-        //return json_encode($request->all());
         $params = $request->all();
-        $id = $request->id;
         unset($params['_token']);
-        unset($params['id']);
-        if ($id) {
-            PemeriksaanLab::where('id', $id)->update($params);
-        }else{
-            $params['bidanid'] = $this->jwt_data['uid'];
-            PemeriksaanLab::create($params);
-        }
+		$params['bidanid'] = $this->jwt_data['uid'];
+        PemeriksaanLab::create($params);
         return response()->json(['status'=>1]);
     }
 }

@@ -12,7 +12,7 @@ class RiwayatKehamilanSaatIniController extends HomeController
     public function index()
 	{
 		$userid = $this->jwt_data['uid'];
-		$data = PasienKehamilan::where('pasienid', $userid)->orderBy('id', 'desc')->firstOrFail();
+		$data = PasienKehamilan::where('pasienid', $userid)->orderBy('id', 'desc')->first();
 		return view('frontend.pasien.modal.history_current_pregnancy.index', [
 			'data' => $data
 		]);
@@ -21,18 +21,24 @@ class RiwayatKehamilanSaatIniController extends HomeController
 	public function edit()
 	{
 		$userid = $this->jwt_data['uid'];
-		$data = PasienKehamilan::where('pasienid', $userid)->orderBy('id', 'desc')->firstOrFail();
+		$data = PasienKehamilan::where('pasienid', $userid)->orderBy('id', 'desc')->first();
 		return view('frontend.pasien.modal.history_current_pregnancy.edit', [
 			'data' => $data
 		]);
 	}
 
-	public function update(Request $request, $id)
+	public function update(Request $request, $id = null)
 	{
 		$params = $request->all();
 		unset($params['_token']);
-		$data = PasienKehamilan::where('id', $id)->first();
-		$data->update($params);
+		if ($id) {
+			PasienKehamilan::where('id', $id)->update($params);
+		}else{
+			$userid = $this->jwt_data['uid'];
+			$params['pasienid'] = $userid;
+			PasienKehamilan::create($params);
+		}
+		
 		return response()->json(['status'=>1]);
 	}
 }

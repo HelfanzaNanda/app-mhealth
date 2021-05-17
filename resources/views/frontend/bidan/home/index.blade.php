@@ -23,7 +23,7 @@
     <div class="container-mhealth pb-5" style="max-height: 86vh; overflow: hidden">
         <h5 class="font-weight-700 mt-33 mb-14">Ringkasan</h5>
         <div class="d-flex justify-content-between mb-2">
-            <div class="h-137 w-177">
+            <div class="h-137 w-177 xs-w-150">
                 <div class="box-summary rounded bg-green">
                     <div class="card-body text-center text-white">
                         <div class="font-size-55 font-weight-700 line-height-67 mb-8">127</div>
@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </div>
-            <div class="h-137 w-177">
+            <div class="h-137 w-177 xs-w-150">
                 <div class="box-summary rounded bg-red">
                     <div class="card-body text-center text-white">
                         <div class="font-size-55 font-weight-700 line-height-67 ">49</div>
@@ -42,7 +42,7 @@
            
         </div>
         <div class="d-flex justify-content-between mb-2">
-            <div class="h-137 w-177">
+            <div class="h-137 w-177 xs-w-150">
                 <div class="box-summary rounded bg-blue">
                     <div class="card-body text-center text-white">
                         <div class="font-size-55 font-weight-700 line-height-67 ">16</div>
@@ -50,7 +50,7 @@
                     </div>
                 </div>
             </div>
-            <div class="h-137 w-177">
+            <div class="h-137 w-177 xs-w-150">
                 <div class="box-summary rounded bg-yellow">
                     <div class="card-body text-center text-white">
                         <div class="font-size-55 font-weight-700 line-height-67 ">73</div>

@@ -8,6 +8,7 @@ use Route;
 use DB;
 use App\Models\User;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Models\BidanPasien;
 use App\Models\PasienProfile;
 
 class BidanController extends HomeController
@@ -18,7 +19,9 @@ class BidanController extends HomeController
 	}
 	public function visit()
 	{
-		$data = PasienProfile::all();
+		$userID = $this->jwt_data['uid'];
+		$data = BidanPasien::where('bidanid', $userID)->get();
+		//$data = PasienProfile::all();
 		return view('frontend.bidan.visit.index', ['data' => $data]);
 	}
 }
